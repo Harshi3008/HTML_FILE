@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	{% load static %}
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script
+		type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- Bootstrap Core CSS -->
+	<link href="{% static 'admin/css/bootstrap.min.css' %}" rel='stylesheet' type='text/css' />
+	<!-- Custom CSS -->
+	<link href="{% static 'admin/css/style.css' %}" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="{% static 'admin/css/morris.css' %}" type="text/css" />
+	<!-- Graph CSS -->
+	<link href="{% static 'admin/css/font-awesome.css' %}" rel="stylesheet">
+	<!-- jQuery -->
+	<script src="{% static 'admin/js/jquery-2.1.4.min.js' %}"></script>
+	<!-- //jQuery -->
+	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet'
+		type='text/css' />
+	<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<!-- lined-icons -->
+	<link rel="stylesheet" href="{% static 'admin/css/icon-font.min.css' %}" type='text/css' />
+	<!-- //lined-icons -->
+	<style>
+		.card .card-header img{
+			height:200px;
+		}
+	</style>
+
+</head>
+<div class="page-container">
+	<!--/content-inner-->
+	<div class="left-content">
+		<div class="mother-grid-inner">
+			<!--header start here-->
+			<div class="header-main">
+				<div class="logo-w3-agile">
+					<h1><a href="{% url 'user_dashboard' %}">Literary Land</a></h1>
+				</div>
+				
+
+				<div class="clearfix"> </div>
+			</div>
+			<!--heder end here-->
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'user_dashboard' %}">Home</a><i
+						class="fa fa-angle-right"></i><a href="{% url 'view book' %}">view book</a>
+			</ol>
+			<div class="row"></div>
+			{% for i in data %}
+			<div class="col-lg-3 col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<img src="{{i.image.url}}" class="d-block w-100 img" alt="">
+					</div>
+					<div class="card-body">
+						<h3>{{i.product_name}}</h3>
+						<p>{{i.product_category}}</p>
+					</div>
+					
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+
+
+
+
+		<!-- script-for sticky-nav -->
+		<script>
+			$(document).ready(function () {
+				var navoffeset = $(".header-main").offset().top;
+				$(window).scroll(function () {
+					var scrollpos = $(window).scrollTop();
+					if (scrollpos >= navoffeset) {
+						$(".header-main").addClass("fixed");
+					} else {
+						$(".header-main").removeClass("fixed");
+					}
+				});
+
+			});
+		</script>
+		<!-- /script-for sticky-nav -->
+		<!--inner block start here-->
+
+		<!--//content-inner-->
+		<!--/sidebar-menu-->
+		<div class="sidebar-menu">
+			<header class="logo1">
+				<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
+			</header>
+			<div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
+			<div class="menu">
+				<ul id="menu">
+					<li><a href="{% url 'user_dashboard' %}"><i class="fa fa-tachometer"></i> <span>Dashboard</span>
+							<div class="clearfix"></div>
+						</a></li>
+					
+					<li><a href="{% url 'view book' %}"><i class="fa fa-eye" aria-hidden="true"></i><span>View book</span>
+							<div class="clearfix"></div>
+						</a></li>
+						
+					
+					
+					<li><a href="{% url 'upload suggested book' %}"><i class="fa fa-image" aria-hidden="true"></i> <span>Upload
+								suggested book</span>
+							<div class="clearfix"></div>
+						</a></li>
+						<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>  <span>Logout</span><div class="clearfix"></div></a></li>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<script>
+		var toggle = true;
+
+		$(".sidebar-icon").click(function () {
+			if (toggle) {
+				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+				$("#menu span").css({ "position": "absolute" });
+			}
+			else {
+				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+				setTimeout(function () {
+					$("#menu span").css({ "position": "relative" });
+				}, 400);
+			}
+
+			toggle = !toggle;
+		});
+	</script>
+	<!--js -->
+	<script src="{% static 'admin/js/jquery.nicescroll.js' %}"></script>
+	<script src="{% static 'admin/js/scripts.js' %}"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="{% static 'admin/js/bootstrap.min.js' %}"></script>
+	<!-- /Bootstrap Core JavaScript -->
+
+	</body>
+
+</html>  

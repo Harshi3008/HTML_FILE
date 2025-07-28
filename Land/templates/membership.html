@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </script>
+    
+
+</head>
+
+<body>
+  <div class="topbar">
+      <a href="{% url 'membership' %}" tabindex="0">Membership</a>
+      <a href="{% url 'contributions' %}" tabindex="0">Contributions</a>
+      <a href="{% url 'issue book' %}" tabindex="0">Issue Books</a>
+      <a href="{% url 'contact' %}" tabindex="0">Contact</a>
+    </div>
+
+    <nav aria-label="Primary navigation">
+      <a href="{% url 'index'%}" tabindex="0">Home</a>
+      <a href="{% url 'book' %}" tabindex="0">Books</a>
+      <a href="{% url 'events' %}" tabindex="0">Events</a>
+      <a href="{% url 'about' %}" tabindex="0">About</a>
+      <a href="{% url 'contact' %}" tabindex="0">Contact</a>
+    </nav>
+    <hr>
+  <main class="container" role="main" aria-label="Membership page">
+    <header class="header">
+      <h1>Membership</h1>
+      
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <span href="index.html">Home</a> &gt;  Membership</span>
+      </nav>
+    </header>
+
+    <section class="flex-wrapper">
+
+      <!-- Membership Form Card -->
+      <section class="card membership-form" aria-labelledby="form-heading">
+        <h2 id="form-heading">Membership Form</h2>
+
+        <form action="#" method="post" novalidate>
+          <label for="fullname">Full Name*</label>
+          <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required aria-required="true" />
+
+          <label for="age">Age*</label>
+          <input type="number" id="age" name="age" placeholder="Enter your age" min="1" max="150" required aria-required="true" />
+
+          <label for="mobile">Mobile Number*</label>
+          <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number" pattern="^\d{10}$" required aria-required="true" aria-describedby="mobileHelp" />
+          <small id="mobileHelp" style="font-size: 0.75rem; color: #666;" aria-live="polite">10 digit number without country code</small>
+
+          <label for="email">Email*</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required aria-required="true" />
+
+          <label for="address">Address*</label>
+          <input type="text" id="address" name="address" placeholder="Enter your address" required aria-required="true" />
+
+          <div class="checkbox-container">
+            <input type="checkbox" id="agree" name="agree" required aria-required="true" />
+            <label for="agree" class="checkbox-line">
+              I agree the Consent and Agreement
+              <a href="#" target="_blank" rel="noopener noreferrer">Terms &amp; Condition</a> and
+              <a href="#" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+            </label>
+          </div>
+
+          <button type="submit" aria-label="Submit membership application form">Submit</button>
+        </form>
+      </section>
+    </section>
+  </main>
+
+
+
+
+   <footer class="bg-maroon text-white py-12">
+    <div class="container max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <!-- Contact Info -->
+        <div>
+        <h3 class="font-semibold text-lg mb-4">Contact Info</h3>
+        <address class="not-italic text-sm space-y-2">
+          <p><strong>Address:</strong>L.I.G.67 Maharshi Dayanand Vihar,Phase1 <br>Kalyanpur, Kanpur, India</p>
+          <p><strong>Mobile Number:</strong> +91 - 7007562487</p>
+          <p><strong>Phone Number:</strong> +91 - 7007562487</p>
+          <p><strong>Email ID:</strong> literaryland.bft@gmail.com</p>
+        </address>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="{% url 'membership' %}" class="hover:underline">Membership</a></li>
+          <li><a href="{% url 'contributions' %}" class="hover:underline">Contributions</a></li>
+          <li><a href="{% url 'issue book' %}" class="hover:underline">Issue Books</a></li>
+          <li><a href="{% url 'contact' %}" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="pt-6 text-center text-xs text-gray-300 border-t border-gray-600 mt-10">
+      All Rights Reserved
+    </div>
+  </footer>
+
+  <button id="scrollToTopBtn" aria-label="Scroll to top" title="Scroll to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    ↑
+  </button>
+  
+</body>
+</html>
+ 

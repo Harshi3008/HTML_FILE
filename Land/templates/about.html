@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+  <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+  <div class="topbar">
+      <a href="{% url 'membership' %}" tabindex="0">Membership</a>
+      <a href="{% url 'contributions' %}" tabindex="0">Contributions</a>
+      <a href="{% url 'issue book' %}" tabindex="0">Issue Books</a>
+      <a href="{% url 'contact' %}" tabindex="0">Contact</a>
+    </div>
+
+    <nav aria-label="Primary navigation">
+      <a href="{% url 'index'%}" tabindex="0">Home</a>
+      <a href="{% url 'book' %}" tabindex="0">Books</a>
+      <a href="{% url 'events' %}" tabindex="0">Events</a>
+      <a href="{% url 'about' %}" tabindex="0">About</a>
+      <a href="{% url 'contact' %}" tabindex="0">Contact</a>
+    </nav>
+    <hr>
+  <header>
+     <h1 class="head fw-bold fs-1">About</h1>
+    <nav class="breadcrumb p-5" aria-label="Breadcrumb">
+      Home > <span>About</span>
+    </nav>
+  </header>
+
+  <main>
+    <div class="accent-circle" aria-hidden="true"></div>
+
+<section class="content-wrapper" aria-labelledby="mainheading">
+      <h2 id="mainheading">
+        About  
+        <span class="highlight"> Literary Land </span>
+        <span class="underline" aria-hidden="true">
+          <svg viewBox="0 0 62 10" aria-hidden="true" focusable="false" >
+            <path d="M2 7.5c9-3 14-2 38-2" />
+          </svg>
+        </span>
+      </h2>
+      <p>Welcome to Literary Land Readers Club — Where Stories and Heritage Breathe
+
+Nestled in the heart of Kanpur, in the peaceful neighborhood of Sri Ram Chandra Mission, Literary Land Readers Club is more than just a library — it is a sanctuary for book lovers, thinkers, artists, and dreamers. A space where the vibrant threads of India’s rich literary and cultural tapestry come together, weaving a timeless experience for all who enter.
+
+Whether you're a lifelong bibliophile, a student preparing for competitive exams, or simply someone who enjoys quiet moments with a good book, Literary Land Readers Club welcomes you with open arms.
+
+A Library Like No Other
+
+With over 3000 handpicked books from every corner of India and world, our collection is a celebration of diversity, depth, and storytelling. Explore the delicate poetry of Kashmir, delve into the royal love stories of Rajasthan, discover the classical music traditions of Karnataka, and lose yourself in the folklore of the Northeast. From gripping historical accounts of Gujarat to philosophical works and Vedic literature, every book here tells a story — not just of a place, but of a people, their passions, and their past.
+
+We also proudly house bestsellers that have captured the hearts of modern readers, ensuring that there’s something for everyone — from the curious reader to the seasoned academic.
+
+More Than a Library — A Cultural Experience
+
+Literary Land Readers Club offers a serene, air-conditioned environment ideal for reading, studying, or simply reflecting. Comfortable seating, calm corners, and the comforting aroma of fresh energy make this a place you’ll want to return to again and again.
+
+
+A Hub of Art, Ideas, and Expression
+
+Literary Land Readers Club is also a thriving cultural center, regularly hosting a variety of events that celebrate India’s artistic spirit. From storytelling sessions and multilingual musical performances to open mic nights, debates, and thought-provoking discussions, our space comes alive with voices and visions from all walks of life.
+
+Each event is an opportunity to engage with culture in a meaningful way — to listen, to share, and to rediscover the beauty of our heritage through live experiences.
+
+Powered by Purpose: An Initiative of Bhaiji Foundation.
+
+Literary Land Readers Club is a proud initiative of Bhaiji Foundation, a Public Trust committed to strengthening the foundations of health, education, and culture. When you become a member, you’re not just joining a library — you’re supporting a movement to preserve India’s cultural wealth and make it accessible to all.
+
+Affordable Membership. Unlimited Possibilities.
+
+Our membership plans are affordable and inclusive, ensuring that everyone — regardless of background — can enjoy the benefits of this cultural haven. Members enjoy access to our entire collection, participate in exclusive events, and make the most of our cozy, air-conditioned reading spaces. Quiet corners await you — whether you're deep into a novel or revising for an exam.
+
+
+---
+
+Literary Land Readers Club isn’t just a destination. It’s a journey — into stories, traditions, and timeless knowledge. Come, be a part of it.</p>
+      
+    </section>
+
+    <div class="image-wrapper" aria-label="Bookshelf filled with various Indian literature books, potted plants, and a wooden chair in front">
+      <img src="{% static 'images/img3.jpg' %}" alt="" onerror="this.style.display='none'"/>
+    </div>
+  </main>
+
+   <footer class="bg-maroon text-white py-12">
+    <div class="container max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <!-- Contact Info -->
+        <div>
+        <h3 class="font-semibold text-lg mb-4">Contact Info</h3>
+        <address class="not-italic text-sm space-y-2">
+          <p><strong>Address:</strong>L.I.G.67 Maharshi Dayanand Vihar,Phase1 <br>Kalyanpur, Kanpur, India</p>
+          <p><strong>Mobile Number:</strong> +91 - 7007562487</p>
+          <p><strong>Phone Number:</strong> +91 - 7007562487</p>
+          <p><strong>Email ID:</strong> literaryland.bft@gmail.com</p>
+        </address>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="membership.html" class="hover:underline">Membership</a></li>
+          <li><a href="contributions.html" class="hover:underline">Contributions</a></li>
+          <li><a href="issued books.html" class="hover:underline">Issue Books</a></li>
+          <li><a href="contact.html" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="pt-6 text-center text-xs text-gray-300 border-t border-gray-600 mt-10">
+      All Rights Reserved
+    </div>
+  </footer>
+
+  <button id="scrollToTopBtn" aria-label="Scroll to top" title="Scroll to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    ↑
+  </button>
+  
+</body>
+</html>
