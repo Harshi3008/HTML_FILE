@@ -12,26 +12,81 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+		.card .card-header img{
+			height:200px;
+		}
+		.topbar {
+      background-color: #472c0d; /* dark wine red */
+      color: white;
+      font-size: 0.9rem;
+      padding: 0.4rem 10px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
 
-  <style>
-        .breadcrumb {
-            display: flex;
-            align-items: center; /* Aligns items vertically */
-        }
-        .breadcrumb a {
-            margin-right: 5px; /* Space between the link and the separator */
-        }
-        .breadcrumb span {
-            margin-left: 5px; /* Space between the separator and the current page */
-        }
-    </style>
+    .topbar a {
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 00;
+      border-right: 1px solid rgba(255, 255, 255, 0.4);
+      padding-right: 0.7rem;
+      transition: color 0.3s ease;
+    }
+    .topbar a:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+    .topbar a:hover {
+      color: #ff8888;
+    }
+
+    /* Navigation */
+    nav {
+      margin-top: 8px;
+      margin-bottom: 32px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+    }
+    nav a {
+      color: #222;
+      margin: 0 12px;
+      padding: 10px 8px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: #472c0d;
+    }
+
+   
+    /* Footer social icon hover */
+    .social-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .social-icon:hover {
+      transform: scale(1.2);
+    }
+
+    /* Border around image */
+    .image-border {
+      border: 3px solid #851d3e;
+      
+    }
+
+	</style>
+
 </head>
-
 <body>
-  <div class="topbar">
+	 <div class="topbar">
       <a href="{% url 'membership' %}" tabindex="0">Membership</a>
       <a href="{% url 'contributions' %}" tabindex="0">Contributions</a>
       <a href="{% url 'issue book' %}" tabindex="0">Issue Books</a>
@@ -57,46 +112,55 @@
 
     </header>
 
-    <article class="book-card">
-      <figure class="book-image">
-        <img src="{% static 'images/img10.jpg' %}"
-          alt="Four books stacked on wooden surface with a dark wood paneled backdrop, covers visible with different titles and colors"
-          loading="lazy"
-          onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8636998b-3ca7-409f-8714-9058cd6428a9.png';" />
-      </figure>
-      <section class="book-details">
-        <h2 class="book-title">Dan Brown - The Da Vinci Code</h2>
-        <p class="book-desc">
-          The Da Vinci Code is a mystery-thriller novel by Dan Brown that follows symbologist Robert Lang. Nestled in
-          the heart of Kanpur, in the peaceful neighborhood of Sri Ram Chandra Mission, Literary Land Readers Club is
-          more than just a library — it is a sanctuary for book lovers, thinkers, artists, and dreamers. A space where
-          the vibrant threads of India’s rich literary and cultural tapestry come together, weaving a timeless
-          experience for all who enter.
-        </p>
-      </section>
-    </article>
+			<!--heder end here-->
+			
+			<div class="row"></div>
+			{% for i in data %}
+			<div class="col-lg-3 col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<img src="{{i.image.url}}" class="d-block w-100 img" alt="">
+					</div>
+					<div class="card-body">
+						<h3>{{i.product_name}}</h3>
+						<p>{{i.price}}</p>
+					</div>
+					<div class="card-footer">
+						<a href="" class="btn btn-info">Issue book</a>
+					</div>
+				</div>
+			</div>
 
-    <article class="book-card">
-      <figure class="book-image">
-        <img src="{% static 'images/img4.jpg' %}"
-          alt="Stack of diverse books with colorful spines in warm neutral light on plain background, highlighting titles related to Indian love stories"
-          loading="lazy"
-          onerror="this.onerror=null;this.src='https://placehold.co/600x350?text=Image+not+available';" />
-      </figure>
-      <section class="book-details">
-        <h2 class="book-title">PS, I Love You</h2>
-        <p class="book-desc">
-          PS, I Love You is a heart-wrenching love story that revolves around the life of a young woman. Nestled in the
-          heart of Kanpur, in the peaceful neighborhood of Sri Ram Chandra Mission, Literary Land Readers Club is more
-          than just a library — it is a sanctuary for book lovers, thinkers, artists, and dreamers. A space where the
-          vibrant threads of India’s rich literary and cultural tapestry come together, weaving a timeless experience
-          for all who enter.
-        </p>
-      </section>
-    </article>
-  </main>
 
-  <footer class="bg-maroon text-white py-12">
+			</tr>
+			{% endfor %}
+		</div>
+
+
+
+
+
+		<!-- script-for sticky-nav -->
+		<script>
+			$(document).ready(function () {
+				var navoffeset = $(".header-main").offset().top;
+				$(window).scroll(function () {
+					var scrollpos = $(window).scrollTop();
+					if (scrollpos >= navoffeset) {
+						$(".header-main").addClass("fixed");
+					} else {
+						$(".header-main").removeClass("fixed");
+					}
+				});
+
+			});
+		</script>
+		<!-- /script-for sticky-nav -->
+		<!--inner block start here-->
+
+		<!--//content-inner-->
+		<!--/sidebar-menu-->
+		 <footer class="bg-maroon text-white py-12">
     <div class="container max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-3 gap-12">
       <!-- Contact Info -->
       <div>
@@ -131,6 +195,31 @@
     ↑
   </button>
 
-</body>
+							<script>
+		var toggle = true;
+
+		$(".sidebar-icon").click(function () {
+			if (toggle) {
+				$(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+				$("#menu span").css({ "position": "absolute" });
+			}
+			else {
+				$(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+				setTimeout(function () {
+					$("#menu span").css({ "position": "relative" });
+				}, 400);
+			}
+
+			toggle = !toggle;
+		});
+	</script>
+	<!--js -->
+	<script src="{% static 'admin/js/jquery.nicescroll.js' %}"></script>
+	<script src="{% static 'admin/js/scripts.js' %}"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="{% static 'admin/js/bootstrap.min.js' %}"></script>
+	<!-- /Bootstrap Core JavaScript -->
+
+	</body>
 
 </html>

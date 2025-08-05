@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
 	{% load static %}
 	<title></title>
@@ -28,26 +27,87 @@
 		.card .card-header img{
 			height:200px;
 		}
+		.topbar {
+      background-color: #472c0d; /* dark wine red */
+      color: white;
+      font-size: 0.9rem;
+      padding: 0.4rem 10px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .topbar a {
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 00;
+      border-right: 1px solid rgba(255, 255, 255, 0.4);
+      padding-right: 0.7rem;
+      transition: color 0.3s ease;
+    }
+    .topbar a:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+    .topbar a:hover {
+      color: #ff8888;
+    }
+
+    /* Navigation */
+    nav {
+      margin-top: 8px;
+      margin-bottom: 32px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+    }
+    nav a {
+      color: #222;
+      margin: 0 12px;
+      padding: 10px 8px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: #472c0d;
+    }
+
 	</style>
 
 </head>
-<div class="page-container">
-	<!--/content-inner-->
-	<div class="left-content">
-		<div class="mother-grid-inner">
-			<!--header start here-->
-			<div class="header-main">
-				<div class="logo-w3-agile">
-					<h1><a href="{% url 'admin_dashboard' %}">Literary Land</a></h1>
-				</div>
+<body>
+	 <div class="topbar">
+      <a href="{% url 'membership' %}" tabindex="0">Membership</a>
+      <a href="{% url 'contributions' %}" tabindex="0">Contributions</a>
+      <a href="{% url 'issue book' %}" tabindex="0">Issue Books</a>
+      <a href="{% url 'contact' %}" tabindex="0">Contact</a>
+    </div>
 
-				<div class="clearfix"> </div>
-			</div>
+
+    <nav aria-label="Primary navigation">
+      <a href="{% url 'index'%}" tabindex="0">Home</a>
+      <a href="{% url 'book' %}" tabindex="0">Books</a>
+      <a href="{% url 'events' %}" tabindex="0">Events</a>
+      <a href="{% url 'about' %}" tabindex="0">About</a>
+      <a href="{% url 'contact' %}" tabindex="0">Contact</a>
+    </nav>
+    <hr>
+    <h1 class="head fw-bold fs-1 text-center">Books</h1>
+  <main class="container" role="main" aria-label="Book page">
+    <header class="header">
+       
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> &gt; <span aria-current="page">Book</span>
+      </nav>
+
+    </header>
+
 			<!--heder end here-->
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Home</a><i
-						class="fa fa-angle-right"></i><a href="{% url 'add product' %}">Add product</a><i class="fa fa-angle-right"></i><a href="{% url 'view product' %}">view product</a></li>
-			</ol>
+			
 			<div class="row"></div>
 			{% for i in data %}
 			<div class="col-lg-3 col-sm-12">
@@ -89,56 +149,8 @@
 
 			});
 		</script>
-		<!-- /script-for sticky-nav -->
-		<!--inner block start here-->
-
-		<!--//content-inner-->
-		<!--/sidebar-menu-->
-<div class="sidebar-menu">
-			<header class="logo1">
-				<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> 
-			</header>
-				<div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
-				   <div class="menu">
-							<ul id="menu" >
-								<li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-tachometer"></i> <span>Dashboard</span><div class="clearfix"></div></a></li>
-								
 	
-								 
-								 <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span> Category </span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
-									<ul id="menu-academico-sub" >
-									<li id="menu-academico-avaliacoes" ><a href="{% url 'add category' %}">Add Category</a></li>
-									 <li id="menu-academico-avaliacoes" ><a href="{% url 'view category' %}">View Category</a></li>
-								   </ul>
-								 </li>
-								 <li id="menu-academico" ><a href="#"><i class="fa fa-navicon" aria-hidden="true"></i><span> Book </span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
-									<ul id="menu-academico-sub" >
-									<li id="menu-academico-avaliacoes" ><a href="{% url 'add product' %}">Add Book</a></li>
-									 <li id="menu-academico-avaliacoes" ><a href="{% url 'view product' %}">View Book</a></li>
-								   </ul>
-								 </li>
-								 <li><a href="{% url 'view issued_book' %}"><i class="fa fa-eye"></i>  <span>View issued books</span><div class="clearfix"></div></a></li>
-								 
-							<li id="menu-academico" ><a href="{% url 'view customer' %}"><i class="fa fa-eye"></i><span>View Subscription</span><div class="clearfix"></div></a></li>
-							
-					
-					<li><a href="{% url 'suggested book' %}"><i class="fa fa-eye"></i> <span>Suggested book</span>
-							<div class="clearfix"></div>
-						</a></li>
-					</li>
-					<li><a href="{% url 'password update' %}"><i class="fa fa-key" aria-hidden="true"></i>
-							<span>Password Update</span>
-							<div class="clearfix"></div>
-						</a></li>
-					<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> <span>Logout</span>
-							<div class="clearfix"></div>
-						</a></li>
-					</li>
-						  </ul>
-						</div>
-							  </div>
-							  <div class="clearfix"></div>		
-							</div>
+
 							<script>
 		var toggle = true;
 
