@@ -113,28 +113,43 @@
     </header>
 
 			<!--heder end here-->
-			
-			<div class="row"></div>
-			{% for i in data %}
-			<div class="col-lg-3 col-sm-12">
-				<div class="card">
-					<div class="card-header">
-						<img src="{{i.image.url}}" class="d-block w-100 img" alt="">
-					</div>
-					<div class="card-body">
-						<h3>{{i.product_name}}</h3>
-						<p>{{i.price}}</p>
-					</div>
-					<div class="card-footer">
-						<a href="" class="btn btn-info">Issue book</a>
-					</div>
-				</div>
-			</div>
+
+      <div class="container">
+	      <div class="row">
+            <div class="col-md-3">
+              <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                  <h3> Book Categories </h3>
+                </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">All</li>
+                <li class="list-group-item">Suspense</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+              </ul>
+              </div>
+          </div>
+          <div class="col-md-9">
+            <div class="row">
+              {% for i in data %}
+              <div class="col-lg-3 col-sm-12 mb-4">
+                <div class="card">
+                  <div class="card-header">
+                    <img src="{{i.image.url}}" class="d-block w-100 img" alt="">
+                  </div>
+                  <div class="card-body">
+                    <h3>{{i.product_name}}</h3>
+                    <p>{{i.price}}</p>
+                  </div>
+                  <div class="card-footer">
+                    <a href="" class="btn btn-info">Issue book</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+      </div>
 
 
-			</tr>
-			{% endfor %}
-		</div>
 
 
 
@@ -160,15 +175,15 @@
 
 		<!--//content-inner-->
 		<!--/sidebar-menu-->
-		 <footer class="bg-maroon text-white py-12">
+	<footer class="bg-maroon text-white py-12">
     <div class="container max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-3 gap-12">
       <!-- Contact Info -->
       <div>
         <h3 class="font-semibold text-lg mb-4">Contact Info</h3>
         <address class="not-italic text-sm space-y-2">
-          <p><strong>Address:</strong> L.I.G. 67 Maharshi Dayanand Vihar, Phase 1 <br>Kalyanpur, Kanpur, India</p>
-          <p><strong>Mobile Number:</strong> +91 - 7007562487</p>
-          <p><strong>Phone Number:</strong> +91 - 7007562487</p>
+          <p><strong>Address:</strong> L.I.G.67 Maharshi Dayanand Vihar, Phase 1 <br>Kalyanpur, Kanpur, India</p>
+          <p><strong>Mobile Number:</strong> +91 - 9621109538</p>
+          <p><strong>Phone Number:</strong> +91 - 9580862771</p>
           <p><strong>Email ID:</strong> literaryland.bft@gmail.com</p>
         </address>
       </div>
@@ -190,10 +205,7 @@
     </div>
   </footer>
 
-  <button id="scrollToTopBtn" aria-label="Scroll to top" title="Scroll to top"
-    onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    ↑
-  </button>
+  
 
 							<script>
 		var toggle = true;

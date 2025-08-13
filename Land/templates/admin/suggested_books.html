@@ -49,15 +49,16 @@
 						<table id="table">
 						<thead>
 						  <tr>
-						
-							<th>Name</th>
-							<th>Contact</th>
 							<th>Book Name</th>
-							<th>Book Category</th>
-							<th>Author name</th>
+							<th>Author Name</th>
 						  </tr>
 						</thead>
-					
+						{% for i in data %}
+							<tr>
+								<td>{{i.book_name}}</td>
+								<td>{{i.author_name}}</td>
+							</tr>
+						{% endfor %}
 						</tbody>
 					  </table>
 					</div>
@@ -116,10 +117,6 @@
 							<div class="clearfix"></div>
 						</a></li>
 					</li>
-					<li><a href="{% url 'password update' %}"><i class="fa fa-key" aria-hidden="true"></i>
-							<span>Password Update</span>
-							<div class="clearfix"></div>
-						</a></li>
 					<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> <span>Logout</span>
 							<div class="clearfix"></div>
 						</a></li>

@@ -12,10 +12,28 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+   integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" 
+   crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+     integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" 
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" 
+     integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" 
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" 
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
   <div class="topbar">
       <a href="{% url 'membership' %}" tabindex="0">Membership</a>
       <a href="{% url 'contributions' %}" tabindex="0">Contributions</a>
@@ -32,53 +50,61 @@
     </nav>
     <hr>
 
-  <header class="hero" role="banner" aria-label="Time Travel Bharat Through Books and Art">
-
-      <div class="hero-text">
-        <span class="highlight">Read, Learn & Grow</span> with every turn of the page.
-      </div>
-      
-      <div class="thumbnail-1" >
-              <img src="{% static 'images/logo.png' %}" alt="logo">
-      </div>
-      <div class="hero-image" aria-label="Bookshelf">
-        <img 
-          src="{% static 'images/img12.JPG' %}"
-          alt="Bookshelf "
-          onerror="this.style.display='none'"/>
-      </div>
-    
+  <header class="hero text-center" data-aos="fade-up" data-aos-duration="1000">
+        <span class="highlight">Read, Learn & Grow with every turn of the page.
+  
+  </header>
+  <header class="hero-carousel" role="banner" aria-label="Literary Land Readers Club Image Carousel">     
+    <div class="owl-carousel owl-theme">
+        <div class="item"> <img src="{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+    </div> 
   </header>
 
-  </div>
-
   <section class="features-row" role="list" aria-label="Features of Literary Land">
-        <div class="feature-card" role="listitem" tabindex="0">
+        <div class="feature-card" data-aos="fade-right" data-aos-duration="1000" role="listitem" tabindex="0">
           <div class="feature-icon feature-books" aria-hidden="true">
             <img src="{% static 'images/books.png' %}">
           </div>
           <h1><a href="{% url 'book' %}">Books</a></h1>
         </div>
-        <div class="feature-card" role="listitem" tabindex="0">
+        <div class="feature-card" data-aos="fade-up" data-aos-duration="1000" role="listitem" tabindex="0">
           <div class="feature-icon feature-conversations" aria-hidden="true">
             <img src="{% static 'images/review.png' %}">
           </div>
-          <h1><a href="{% url 'review' %}">Conversations</a></h1>
+          <h1><a href="{% url 'about' %}">Conversations</a></h1>
         </div>
-        <div class="feature-card" role="listitem" tabindex="0">
+        <div class="feature-card" data-aos="fade-down" data-aos-duration="1000" role="listitem" tabindex="0">
           <div class="feature-icon feature-experience" aria-hidden="true">
             <img src="{% static 'images/event.png' %}">
           </div>
         <h1><a href="{% url 'events' %}">Event</a></h1>
         </div>
+        <div class="feature-card" data-aos="fade-left" data-aos-duration="1000" role="listitem" tabindex="0">
+          <div class="feature-icon feature-experience" aria-hidden="true">
+            <img src="{% static 'images/read more books.jpg' %}">
+          </div>
+        <h1><a href="{% url 'issue book' %}">Issue Book</a></h1>
+        </div>
   </section>
   
   <section class="thought-section" aria-labelledby="thought-title">
-      <div class="thought-image-container">
+      <div class="thought-image-container" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
         <img src="{% static 'images/img4.jpg' %}" alt="Close up photo of a bookshelf filled with Indian literature and cultural books on display" onerror="this.style.display='none'" />
         <div class="decorative-circle" style="top: 10%; left: 12%; border-color:#9E2146; opacity:0.3;" aria-hidden="true"></div>
       </div>
-      <article class="thought-text">
+
+      <article class="thought-text" data-aos="zoom-in-left" data-aos-duration="1000" aria-labelledby="thought-title">
         <h2 id="thought-title"><span class="highlight">Literary Land</span></h2>
         <p id="thought-title">
           Welcome to <span class="highlight">Literary Land</span> Readers Club — Where Stories and Heritage Breathe.
@@ -187,26 +213,25 @@
       <br/><br/>
       </article>
     </section>
+    
     <main class="flex-grow container mx-auto px-5 py-12 max-w-7xl">
-      <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
-        <div class="flex-shrink-0 w-full md:w-56 aspect-square image-border">
-          <img src="{% static 'images/img9.jpg' %}" alt="" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='';" />
-        </div>
-        <div class="flex-grow bg-white p-6 border border-gray-200 rounded shadow-sm text-gray-800">
-          <h2 class="font-semibold text-xl mb-3">Team</h2>
-          
-          <p class="text-xs font-light text-gray-500">
-  With over 3000 handpicked books from every corner of India and world, our collection is a celebration of diversity, depth, and storytelling. Explore the delicate poetry of Kashmir, delve into the royal love stories of Rajasthan, discover the classical music traditions of Karnataka, and lose yourself in the folklore of the Northeast. From gripping historical accounts of Gujarat to philosophical works and Vedic literature, every book here tells a story — not just of a place, but of a people, their passions, and their past.
-  We also proudly house bestsellers that have captured the hearts of modern readers, ensuring that there’s something for everyone — from the curious reader to the seasoned academic.
-  More Than a Library — A Cultural Experience.
-            <br />
-          </p>
-          <button class="btn-primary" aria-label="Read more about Samay Yaan Thought Section">
-          Read More
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l5 5-5 5" stroke="white" stroke-width="2" fill="none" fill-rule="evenodd"/></svg>
-        </button>
-        </div>
-      </div>
+      <h2 class="team-header">
+        <h1> Team of <span class="highlight">Literary Land</span></h1>
+      </h2>
+    <div class="owl-carousel owl-theme">
+        <div class="item"> <img src="{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+        <div class="item"><img src= "{% static 'images/img4.jpg' %}" > </div>
+</div> 
     </main>
 
 <footer class="bg-maroon text-white py-12">
@@ -215,9 +240,9 @@
       <div>
         <h3 class="font-semibold text-lg mb-4">Contact Info</h3>
         <address class="not-italic text-sm space-y-2">
-          <p><strong>Address:</strong>L.I.G.67 Maharshi Dayanand Vihar, Phase 1 <br>Kalyanpur, Kanpur, India</p>
-          <p><strong>Mobile Number:</strong> +91 - 7007562487</p>
-          <p><strong>Phone Number:</strong> +91 - 7007562487</p>
+          <p><strong>Address:</strong> L.I.G.67 Maharshi Dayanand Vihar, Phase 1 <br>Kalyanpur, Kanpur, India</p>
+          <p><strong>Mobile Number:</strong> +91 - 9621109538</p>
+          <p><strong>Phone Number:</strong> +91 - 9580862771</p>
           <p><strong>Email ID:</strong> literaryland.bft@gmail.com</p>
         </address>
       </div>
@@ -254,6 +279,26 @@
     <script src="{% static 'js/main.js' %}"></script>
 
 </body>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".owl-carousel").owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            });
+        });
+    </script>
 </html>
 
 

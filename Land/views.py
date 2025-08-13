@@ -1,24 +1,45 @@
 from datetime import date
 from django.shortcuts import render,redirect
-from.models import add_category,product_detail, order, coustomer, suggested, issued_book, Membership
-from .forms import MembershipForm
+from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
+from.models import add_category,product_detail, order, coustomer, suggested, issued_book, coustomers
 import random
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
+def send_otp(contact):
+        account_sid = os.getenv('ACf7119d5eb12735c120762192e130a40d')
+        auth_token =  os.getenv('52cdad05c282c820791f3ceb45ed3999')
+        Client = Client(account_sid, auth_token)
+
+        otp = random.randint(100000, 999999)
+        message = Client.messages.create(
+            body=f'Your OTP is {otp}, please do not share it with anyone.',
+            from_='+7607846008',
+            to="+91" + contact
+
+        )
+        return otp
 
 # Create your views here.
 
-def add_category(request):
-    if request.method == "POST":
-        cname = request.POST['category_name']
+
+#admin views
+def add_categorys(request):
+    if request.method=="POST":
+        cname=request.POST['category_name']
         add_category(category_name=cname).save()
-        msg = "Category added"
-        return render(request, 'admin/add_category.html', {'msg': msg})
-    return render(request, 'admin/add_category.html')
+        msg="category added"
+        return render(request,'admin/add_category.html',{'msg':msg})
+    return render(request,'admin/add_category.html')
 
 def view_category(request):
-    data = add_category.objects.all()
-    return render(request, 'admin/view_category.html', {'data': data})
+    data=add_category.objects.all()
+    return render(request,'admin/view_category.html',{'data':data})
+
+
 
 def admin_dashboard(request):
     return render(request, 'admin/admin_dashboard.html')
@@ -47,32 +68,6 @@ def view_customer(request):
     data = coustomer.objects.all()
     return render(request, 'admin/view_subscription.html', {'data': data})
 
-def suggested_book_post(request):
-    if request.method == "POST":
-        book_name = request.POST['book_name']
-        book_author = request.POST['book_author']
-        suggested(book_name=book_name, author_name=book_author).save()
-        msg = "THANK YOU FOR SUGGESTING A BOOK"
-        return render(request, 'user/suggested_books.html', {'msg': msg})
-    return render(request, 'user/suggested_books.html')
-
-def password_update(request):
-    if request.method == "POST":
-        email = request.POST['email']
-        cpassword = request.POST['cpassword']
-        npassword = request.POST['npassword']
-        try:
-            user = coustomer.objects.get(email=email)
-            if user.password == cpassword:
-                user.password = npassword
-                user.save()
-                msg = "Your password is successfully updated"
-            else:
-                msg = "Wrong Password Entered"
-        except coustomer.DoesNotExist:
-            msg = "User not found"
-        return render(request, 'admin/password_update.html', {'msg': msg})
-    return render(request, 'admin/password_update.html')
 
 def suggested_book(request):
     data = suggested.objects.all()
@@ -81,6 +76,20 @@ def suggested_book(request):
 def logout(request):
     return redirect('index')
 
+
+
+
+
+def upload_suggested_books(request):
+    if request.method=="POST":
+        bname=request.POST['book_name']
+        aname=request.POST['author_name']
+        suggested(book_name=bname, author_name=aname).save()
+        msg="added"
+        return render(request,'user/upload_suggested_book.html',{'msg':msg})
+    return render(request,'user/upload_suggested_book.html')
+
+
 def user_dashboard(request):
     return render(request, 'user/user_dashboard.html')
 
@@ -88,35 +97,11 @@ def view_books(request):
     data = product_detail.objects.all()
     return render(request, 'book.html', {'data': data})
 
-def upload_suggested_book(request):
-    data = suggested.objects.all()
-    return render(request, 'user/upload_suggested_book.html', {'data': data})
 
 def issue_books(request):
     data = product_detail.objects.all()
     return render(request, 'user/issue_book.html', {'data': data})
 
-def memberships(request):
-    if request.method == "POST":
-        email_id = request.POST['email']
-        password = request.POST['password']
-        try:
-            user = coustomer.objects.get(email=email_id)
-            if user.password == password:
-                user_type = user.user_type
-                if user_type == 'Admin':
-                    request.session['email'] = email_id
-                    return redirect('admin_dashboard')
-                else:
-                    request.session['email'] = email_id
-                    return redirect('user_dashboard')
-            else:
-                msg = "Invalid email or password"
-                return render(request, 'membership.html', {'msg': msg})
-        except coustomer.DoesNotExist:
-            msg = "Invalid email or password"
-            return render(request, 'membership.html', {'msg': msg})
-    return render(request, 'membership.html')
 
 def index(request):
     return render(request, 'index.html')
@@ -155,17 +140,31 @@ def issue_books(request):
         else:
             msg = "Invalid request."
         data = product_detail.objects.all()
-        return render(request, 'issue book.html', {'data': data, 'msg': msg})
+        return render(request, 'issue.html', {'data': data, 'msg': msg})
     else:
         search_query = request.GET.get('search', '')
         if search_query:
             data = product_detail.objects.filter(
-                models.Q(product_name__icontains=search_query) |
-                models.Q(product_category__icontains=search_query)
+                coustomer(product_name__icontains=search_query) |
+                coustomer(product_category__icontains=search_query)
             )
         else:
             data = product_detail.objects.all()
-        return render(request, 'issue book.html', {'data': data})
+        return render(request, 'issue.html', {'data': data})
+
+def issue_book(request):
+    if request.method=="POST":
+        name=request.POST['name']
+        email_id=request.POST['email']
+        if coustomer.objects.filter(email=email_id,name=name):
+            data=coustomer.objects.filter(email=email_id,name=name).get()
+            return redirect('book.html')
+        else:
+            msg="Invalid name or email"
+            return render(request,'issue.html',{'msg':msg})
+    return render(request,'issue.html')
+
+
 
 def books(request):
     data = product_detail.objects.all()
@@ -174,21 +173,7 @@ def books(request):
 def reviews(request):
     return render(request, 'review.html')
 
-def issue_login(request):
-    if request.method == 'POST':
-        register_number = request.POST.get('register_number')
-        try:
-            user = coustomer.objects.get(contact=register_number)
-            otp = str(random.randint(100000, 999999))
-            request.session['otp'] = otp
-            request.session['register_number'] = register_number
-            print(f"Sending OTP {otp} to {register_number}")
-            return redirect('otp_verify')
-        except coustomer.DoesNotExist:
-            error = "Register number not found"
-            return render(request, 'issue.html', {'error': error})
-    else:
-        return render(request, 'issue.html')
+
 
 def otp_verify(request):
     if request.method == 'POST':
@@ -202,55 +187,81 @@ def otp_verify(request):
     else:
         return render(request, 'otp.html')
 
-def login_view(request):
+
+
+
+
+
+def memberships(request):
+     if request.method == 'POST':
+        name=request.POST['name']
+        email=request.POST['email']
+        contact=request.POST['contact']
+
+        if coustomer.objects.filter(email=email, contact=contact).exists():
+            msg = "You are already a member"
+            return render(request, 'membership.html', {'msg': msg})
+        
+        if coustomer.objects.filter(name=name).exists():
+            msg = "You are already a member"
+            return render(request, 'membership.html', {'msg': msg})
+        if coustomer.objects.filter(contact=contact).exists():
+            msg = "You are already a member"
+            return render(request, 'membership.html', {'msg': msg})
+
+        user = coustomer.objects.filter(name=name,email=email,contact=contact, is_active=False)
+        return render(request, 'verify.html', {'contact': contact})
+     
+     if request.user.is_authenticated:
+        return redirect('membership')
+     return render(request,'membership.html')
+
+
+def otp_verify(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        contact = request.POST.get('contact')
-        password = request.POST.get('password')
-
-        if not (name and email and contact and password):
-            error = "Please fill all fields."
-            return render(request, 'login.html', {'error': error, 'name': name, 'email': email, 'contact': contact})
-
-        user = None
+        contacts = request.POST.get('contact')
+        otp = request.POST.get('otp')
         try:
-            user = coustomer.objects.get(email=email)
-        except coustomer.DoesNotExist:
-            try:
-                user = coustomer.objects.get(contact=contact)
-            except coustomer.DoesNotExist:
-                user = None
+            otp_obj = coustomers.objects.get(contact=contacts, otp=otp)
 
-        if user:
-            if user.password == password:
-                request.session['user_id'] = user.id
-                request.session['user_name'] = user.name
-                return redirect('user_dashboard')
+            if otp_obj.is_expired():
+                messages.error(request,"OTP has expired. Please request a new OTP.")
+                return redirect('verify_otp')
+            if otp_obj.otp == otp:
+                user = coustomers.objects.get(contact=contacts)
+                otp_obj.is_active = True
+                otp_obj.save()
+                otp_obj.delete()  # Delete the OTP after successful verification
+                messages.success(request, "OTP verified successfully.")
+                request.session['register_number'] = contacts
+                return redirect('membership.html')
             else:
-                error = "Incorrect password."
-                return render(request, 'login.html', {'error': error, 'name': name, 'email': email, 'contact': contact})
-        else:
-            new_user = coustomer(name=name, email=email, contact=contact, password=password)
-            new_user.save()
-            request.session['user_id'] = new_user.id
-            request.session['user_name'] = new_user.name
-            return redirect('user_dashboard')
-    else:
-        return render(request, 'login.html')
+                messages.error(request, "Invalid OTP. Please try again.")
+                return redirect('verify_otp')   
+            
+        except coustomers.DoesNotExist:
+            messages.error(request, "Invalid contact number or OTP. Please try again.")
+            return redirect('membership')
+    return render(request, 'verify.html')
+            
 
 
-def membership_view(request):
-    if request.method == 'POST':
-        form = MembershipForm(request.POST)
-        if form.is_valid():
-            form.save()
-            msg = "Membership form submitted successfully."
-            form = MembershipForm()  # reset form after successful submission
-            return render(request, 'membership.html', {'form': form, 'msg': msg})
+def logins(request):
+    if request.method=="POST":
+        name=request.POST['name']
+        email_id=request.POST['email']
+        if coustomer.objects.filter(email=email_id,name=name):
+            data=coustomer.objects.filter(email=email_id,name=name).get()
+            user_type=data.user_type
+            if user_type=='Admin':
+                request.session['email']=email_id
+                return redirect('admin_dashboard')
+            else:
+                request.session['email']=email_id
+                return redirect('user_dashboard')
         else:
-            msg = "Please correct the errors below."
-            return render(request, 'membership.html', {'form': form, 'msg': msg})
-    else:
-        form = MembershipForm()
-    return render(request, 'membership.html', {'form': form})
+            msg="Invalid name or email"
+            return render(request,'login.html',{'msg':msg})
+    return render(request,'login.html')
+
+

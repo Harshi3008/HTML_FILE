@@ -47,36 +47,16 @@
 					<form class="form-horizontal" enctype="multipart/form-data" action="{% url 'upload suggested book' %}" method="post">
 						{% csrf_token %}
 						<div class="form-group">
-							<label class="col-sm-2 control-label hor-form">Name</label>
-							<div class="col-sm-10">
-								<input type="text" name="name" class="form-control" id="inputpname"
-									placeholder="enter byour name">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label hor-form">Contact</label>
-							<div class="col-sm-10">
-								<input type="number" name="contact" class="form-control" id="inputcontact"
-									placeholder="enter your contact">
-							</div>
-						</div>
-						<div class="form-group">
 							<label class="col-sm-2 control-label hor-form">Book's Name</label>
 							<div class="col-sm-10">
-								<input type="text" name="dname" class="form-control" id="inputdname" placeholder="enter book name">
-							</div>
-						</div>
-                        <div class="form-group">
-							<label class="col-sm-2 control-label hor-form">Book's category</label>
-							<div class="col-sm-10">
-								<input type="text" name="dname" class="form-control" id="inputdname" placeholder="enter book category">
+								<input type="text" name="book_name" class="form-control" id="inputdname" placeholder="enter book name" required>
 							</div>
 						</div>
 
                         <div class="form-group">
 							<label class="col-sm-2 control-label hor-form">Book author's Name</label>
 							<div class="col-sm-10">
-								<input type="text" name="dname" class="form-control" id="inputdname" placeholder="enter author's name">
+								<input type="text" name="author_name" class="form-control" id="inputdname" placeholder="enter author's name" required>
 							</div>
 						</div>
 						

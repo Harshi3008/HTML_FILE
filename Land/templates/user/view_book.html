@@ -49,6 +49,7 @@
 				<li class="breadcrumb-item"><a href="{% url 'user_dashboard' %}">Home</a><i
 						class="fa fa-angle-right"></i><a href="{% url 'view book' %}">view book</a>
 			</ol>
+			
 			<div class="row"></div>
 			{% for i in data %}
 			<div class="col-lg-3 col-sm-12">
@@ -58,13 +59,20 @@
 					</div>
 					<div class="card-body">
 						<h3>{{i.product_name}}</h3>
-						<p>{{i.product_category}}</p>
+						<p>{{i.price}}</p>
 					</div>
-					
+					<div class="card-footer">
+						<a href="" class="btn btn-info">Issue book</a>
+					</div>
 				</div>
 			</div>
+
+
+			</tr>
 			{% endfor %}
 		</div>
+	</div>
+
 
 
 
@@ -117,7 +125,6 @@
 			</div>
 		</div>
 		<div class="clearfix"></div>
-	</div>
 	<script>
 		var toggle = true;
 

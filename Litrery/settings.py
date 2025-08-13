@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+
    
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,7 +31,7 @@ SECRET_KEY = 'django-insecure-fb!geo==2ggg9ewvjsj0eo#(!3vjexf#@zil@lmg0g9*4c0z69
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['krishna78.pythonanywhere.com', 'www.krishna78.pythonanywhere.com']
 
 
 # Application definition
@@ -127,3 +128,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+ACCOUNT_SID = 'ACf7119d5eb12735c120762192e130a40d'
+AUTH_TOKEN = '52cdad05c282c820791f3ceb45ed3999'
+ 

@@ -92,13 +92,12 @@
       justify-content: center;
       align-items: center;
       padding: 2rem 0;
-      background-color:rgb(221, 209, 211);
-      background-image: url('../images/back.jpg');
+      
     }
 
     header.hero .hero-text {
       flex-basis: 100%;
-      max-width: 600px;
+      max-width: 100%;
       text-align: center;
       font-weight: 600;
       font-size: 0.5rem;
@@ -108,47 +107,11 @@
 
     header.hero .hero-text span.highlight {
       color: #9E2146;
+      text-align: center;
       padding-left: 5px;
     }
 
-    header.hero .hero-image {
-      position: relative;
-      padding-right:20px;
-      flex-shrink: 0;
-      max-width: 420px;
-      width: 100%;
-      margin: 1rem 0;
-      background-image: url('../images/back.jpg');
-    }
-    
 
-    header.hero .hero-image img {
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Small circles and abstract shapes decorative */
-    .decorative-circle {
-      width: 60px;
-      height: 60px;
-      border: 5px solid #f1ae2b;
-      border-radius: 50%;
-      position: absolute;
-      top: 15%;
-      left: 75%;
-      opacity: 0.6;
-      pointer-events: none;
-    }
-    .decorative-dots {
-      position: absolute;
-      width: 66px;
-      height: 66px;
-      top: 80%;
-      left: 60%;
-      background: radial-gradient(#9e2146 15%, transparent 16%);
-      background-size: 6px 6px;
-      opacity: 0.15;
-    }
     
     /* Features cards row */
     .features-row {
@@ -383,6 +346,20 @@
       font-size: 0.85rem;
       padding: 0.4rem 1rem;
       border-radius: 6px;
+    }
+
+
+    /*team*/
+
+        .team-header {
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: #222;
+      font-size: 1.1rem;
+    }
+    .team-header span.highlight {
+      color: #9E2146;
+      
     }
 
     /* Happenings content box */

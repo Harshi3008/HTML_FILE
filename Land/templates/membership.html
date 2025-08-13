@@ -1,99 +1,107 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Membership</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  {% load static %}
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<div class="container my-5">
-    <div class="row">
-        <!-- Membership Plans -->
-        <div class="col-md-6">
-            <h3>Membership Plans</h3>
-            <div class="mb-4">
-                <h5>General Membership</h5>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr><td>For 1 Year</td><td>₹ 3,500</td></tr>
-                        <tr><td>For 6 months</td><td>₹ 2,000</td></tr>
-                        <tr><td>For 3 months</td><td>₹ 1,000</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="mb-4">
-                <h5>Student Membership</h5>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr><td>For 1 Year</td><td>₹ 3,500</td></tr>
-                        <tr><td>For 6 Months</td><td>₹ 2,000</td></tr>
-                        <tr><td>For 3 Months</td><td>₹ 1,000</td></tr>
-                    </tbody>
-                </table>
-                <small>* For reading Library books only.</small>
-            </div>
-            <div class="mb-4">
-                <h5>Special Membership</h5>
-                <table class="table table-bordered">
-                    <tbody>
-                        <tr><td>Daily Pass</td><td>₹ 120</td></tr>
-                        <tr><td>For 1 Month</td><td>₹ 1,100</td></tr>
-                        <tr><td>For 6 Months</td><td>₹ 6,000</td></tr>
-                        <tr><td>For 1 Year</td><td>₹ 11,500</td></tr>
-                    </tbody>
-                </table>
-                <small>* For preparation of exams, who can bring their own books too.</small>
-            </div>
-        </div>
+   <div class="topbar">
+    <a href="{% url 'membership' %}" tabindex="0">Membership</a>
+    <a href="{% url 'contributions' %}" tabindex="0">Contributions</a>
+    <a href="{% url 'issue book' %}" tabindex="0">Issue Books</a>
+    <a href="{% url 'contact' %}" tabindex="0">Contact</a>
+  </div>
 
-        <!-- Membership Form -->
-        <div class="col-md-6">
-            <h3>Membership of the NGO Form</h3>
-            {% if msg %}
-                <div class="alert alert-info">{{ msg }}</div>
-            {% endif %}
-            <form method="post" novalidate>
-                {% csrf_token %}
-                <div class="mb-3">
-                    {{ form.full_name.label_tag }}{{ form.full_name }}
-                    {% if form.full_name.errors %}<div class="text-danger">{{ form.full_name.errors }}</div>{% endif %}
-                </div>
-                <div class="mb-3">
-                    {{ form.age.label_tag }}{{ form.age }}
-                    {% if form.age.errors %}<div class="text-danger">{{ form.age.errors }}</div>{% endif %}
-                </div>
-                <div class="mb-3">
-                    {{ form.mobile_number.label_tag }}{{ form.mobile_number }}
-                    {% if form.mobile_number.errors %}<div class="text-danger">{{ form.mobile_number.errors }}</div>{% endif %}
-                </div>
-                <div class="mb-3">
-                    {{ form.email.label_tag }}{{ form.email }}
-                    {% if form.email.errors %}<div class="text-danger">{{ form.email.errors }}</div>{% endif %}
-                </div>
-                <div class="mb-3">
-                    {{ form.address.label_tag }}{{ form.address }}
-                    {% if form.address.errors %}<div class="text-danger">{{ form.address.errors }}</div>{% endif %}
-                </div>
-                <div class="mb-3">
-                    {{ form.profession.label_tag }}{{ form.profession }}
-                    {% if form.profession.errors %}<div class="text-danger">{{ form.profession.errors }}</div>{% endif %}
-                </div>
-                <div class="mb-3">
-                    {{ form.plan_choice.label_tag }}{{ form.plan_choice }}
-                    {% if form.plan_choice.errors %}<div class="text-danger">{{ form.plan_choice.errors }}</div>{% endif %}
-                </div>
-                <div class="mb-3">
-                    {{ form.aadhar_card_number.label_tag }}{{ form.aadhar_card_number }}
-                    {% if form.aadhar_card_number.errors %}<div class="text-danger">{{ form.aadhar_card_number.errors }}</div>{% endif %}
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+  <nav aria-label="Primary navigation">
+    <a href="{% url 'index'%}" tabindex="0">Home</a>
+    <a href="{% url 'book' %}" tabindex="0">Books</a>
+    <a href="{% url 'events' %}" tabindex="0">Events</a>
+    <a href="{% url 'about' %}" tabindex="0">About</a>
+    <a href="{% url 'contact' %}" tabindex="0">Contact</a>
+  </nav>
+<body class="bg-light">
+    <div class="container p-5">
+        <div class="row p-5">
+            <div class = "col-lg-6 bg-white m-auto rounded-top wrapper">
+                <h2 class="text-center pt-3">Signup Page</h2>
+                <form action="{% url 'membership' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="name" placeholder="Name" required>     
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="email" placeholder="Email" required>     
+                    </div>
+                    <div class=" form-group pl-2 input-group mb-3">
+                        <div class="input-group ">
+                            
+                          <input type="text" class="form-control" name="contact"  placeholder="Contact Number" required>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success align-center">Signup Now</button>
+                        <p class="text-center text-muted mt-2">
+                        </p>
+                        <p class="text-center">
+                            Already Have an Account? <a href="{% url 'login' %}">Login Now</a>
+                             
+                        </p>
+                        {{  msg }}
+                    </div>
+                    
+                </form>
+            
+            </div>
         </div>
     </div>
-</div>
+<footer class="bg-maroon text-white py-12">
+    <div class="container max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <!-- Contact Info -->
+      <div>
+        <h3 class="font-semibold text-lg mb-4">Contact Info</h3>
+        <address class="not-italic text-sm space-y-2">
+          <p><strong>Address:</strong> L.I.G.67 Maharshi Dayanand Vihar, Phase 1 <br>Kalyanpur, Kanpur, India</p>
+          <p><strong>Mobile Number:</strong> +91 - 9621109538</p>
+          <p><strong>Phone Number:</strong> +91 - 9580862771</p>
+          <p><strong>Email ID:</strong> literaryland.bft@gmail.com</p>
+        </address>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="{% url 'membership' %}" class="hover:underline">Membership</a></li>
+          <li><a href="{% url 'contributions' %}" class="hover:underline">Contributions</a></li>
+          <li><a href="{% url 'issue book' %}" class="hover:underline">Issue Books</a></li>
+          <li><a href="{% url 'contact' %}" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pt-6 text-center text-xs text-gray-300 border-t border-gray-600 mt-10">
+      All Rights Reserved
+    </div>
+  </footer>
+
+  <button id="scrollToTopBtn" aria-label="Scroll to top" title="Scroll to top"
+    onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    ↑
+  </button>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>
