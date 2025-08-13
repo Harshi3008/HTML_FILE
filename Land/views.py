@@ -1,7 +1,10 @@
 from datetime import date
 from django.shortcuts import render,redirect
-from.models import add_category,product_detail, order, coustomer, suggested, issued_book
+from.models import add_category,product_detail, order, coustomer, suggested, issued_book, Membership
+from .forms import MembershipForm
 import random
+
+
 
 # Create your views here.
 
@@ -235,3 +238,19 @@ def login_view(request):
             return redirect('user_dashboard')
     else:
         return render(request, 'login.html')
+
+
+def membership_view(request):
+    if request.method == 'POST':
+        form = MembershipForm(request.POST)
+        if form.is_valid():
+            form.save()
+            msg = "Membership form submitted successfully."
+            form = MembershipForm()  # reset form after successful submission
+            return render(request, 'membership.html', {'form': form, 'msg': msg})
+        else:
+            msg = "Please correct the errors below."
+            return render(request, 'membership.html', {'form': form, 'msg': msg})
+    else:
+        form = MembershipForm()
+    return render(request, 'membership.html', {'form': form})

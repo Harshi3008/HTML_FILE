@@ -12,7 +12,7 @@ urlpatterns = [
     path('events', views.event, name='events'),
     path('contact', views.contacts, name='contact'),
     path('contributions', views.contribution, name='contributions'),
-    path('membership', views.memberships, name='membership'),
+    path('membership', views.membership_view, name='membership'),
     path('book', views.books, name='book'),
     path('review', views.reviews, name='review'),
 

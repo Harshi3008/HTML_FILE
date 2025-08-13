@@ -43,4 +43,31 @@ class order(models.Model):
 class suggested(models.Model):
     book_name=models.CharField(max_length=50)
     author_name=models.CharField(max_length=50)
+
+class Membership(models.Model):
+    PLAN_CHOICES = [
+        ('general_1_year', 'General Membership - 1 Year'),
+        ('general_6_months', 'General Membership - 6 Months'),
+        ('general_3_months', 'General Membership - 3 Months'),
+        ('student_1_year', 'Student Membership - 1 Year'),
+        ('student_6_months', 'Student Membership - 6 Months'),
+        ('student_3_months', 'Student Membership - 3 Months'),
+        ('special_daily_pass', 'Special Membership - Daily Pass'),
+        ('special_1_month', 'Special Membership - 1 Month'),
+        ('special_6_months', 'Special Membership - 6 Months'),
+        ('special_1_year', 'Special Membership - 1 Year'),
+    ]
+
+    full_name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField()
+    mobile_number = models.CharField(max_length=15)
+    email = models.EmailField()
+    address = models.TextField()
+    profession = models.CharField(max_length=100)
+    plan_choice = models.CharField(max_length=30, choices=PLAN_CHOICES)
+    aadhar_card_number = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.full_name
    
