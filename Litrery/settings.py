@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-fb!geo==2ggg9ewvjsj0eo#(!3vjexf#@zil@lmg0g9*4c0z69
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['krishna78.pythonanywhere.com', 'www.krishna78.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition

@@ -1,97 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  {% load static %}
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>QR Login</title>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    #reader { width: 350px; margin: auto; }
+    #result { margin-top: 15px; font-size: 18px; font-weight: bold; }
+  </style>
 </head>
 <body>
-   <div class="topbar">
-    <a href="{% url 'membership' %}" tabindex="0">Membership</a>
-    <a href="{% url 'contributions' %}" tabindex="0">Contributions</a>
-    <a href="{% url 'issue book' %}" tabindex="0">Issue Books</a>
-    <a href="{% url 'contact' %}" tabindex="0">Contact</a>
-  </div>
+  <h2>Login with QR Code</h2>
+  <div id="reader"></div>
+  <p id="result">Scanning...</p>
 
-  <nav aria-label="Primary navigation">
-    <a href="{% url 'index'%}" tabindex="0">Home</a>
-    <a href="{% url 'book' %}" tabindex="0">Books</a>
-    <a href="{% url 'events' %}" tabindex="0">Events</a>
-    <a href="{% url 'about' %}" tabindex="0">About</a>
-    <a href="{% url 'contact' %}" tabindex="0">Contact</a>
-  </nav>
-<body class="bg-light">
-    <div class="container p-5">
-        <div class="row p-5">
-            <div class = "col-lg-6 bg-white m-auto rounded-top wrapper">
-                <h2 class="text-center pt-3">Login Page</h2>
-                <form action="{% url 'login' %}" method="POST">
-                    {% csrf_token %}
-            {% csrf_token %}
-			<div class="input-group mb-3">
-          <input type="text" class="form-control" name="name" placeholder="Name" required>     
-      </div>
-      <div class="input-group mb-3">
-          <input type="text" class="form-control" name="email" placeholder="Email" required>     
-      </div>
+  <script>
+    // Function called when QR is successfully scanned
+    function onScanSuccess(decodedText) {
+      document.getElementById("result").innerText = "Scanned: " + decodedText;
 
-			<div class="login-w3">
-					<input type="submit" class="login" value="Sign In">
-                    {{msg}}
-			</div>
-			<div class="clearfix"></div>
-		</form>
-				<div class="back">
-					<a href="{% url 'index' %}">Back to home</a>
-				</div>
-	</div>
-	</div>
-	</div>
+      // Send scanned QR data to Django for verification
+      fetch("/login-qr/", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json", 
+          "X-CSRFToken": getCookie("csrftoken") 
+        },
+        body: JSON.stringify({ qrData: decodedText })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = "/dashboard/";  // redirect on success
+        } else {
+          document.getElementById("result").innerText = "Invalid QR Code ❌";
+        }
+      });
+    }
 
-<footer class="bg-maroon text-white py-12">
-    <div class="container max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-3 gap-12">
-      <!-- Contact Info -->
-      <div>
-        <h3 class="font-semibold text-lg mb-4">Contact Info</h3>
-        <address class="not-italic text-sm space-y-2">
-          <p><strong>Address:</strong> L.I.G.67 Maharshi Dayanand Vihar, Phase 1 <br>Kalyanpur, Kanpur, India</p>
-          <p><strong>Mobile Number:</strong> +91 - 9621109538</p>
-          <p><strong>Phone Number:</strong> +91 - 9580862771</p>
-          <p><strong>Email ID:</strong> literaryland.bft@gmail.com</p>
-        </address>
-      </div>
+    // Handle scan failure (optional)
+    function onScanFailure(error) {
+      console.warn(QR error: ${error});
+    }
 
-      <!-- Quick Links -->
-      <div>
-        <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href="{% url 'membership' %}" class="hover:underline">Membership</a></li>
-          <li><a href="{% url 'contributions' %}" class="hover:underline">Contributions</a></li>
-          <li><a href="{% url 'issue book' %}" class="hover:underline">Issue Books</a></li>
-          <li><a href="{% url 'contact' %}" class="hover:underline">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="pt-6 text-center text-xs text-gray-300 border-t border-gray-600 mt-10">
-      All Rights Reserved
-    </div>
-  </footer>
+    // Start the camera scanner automatically
+    let scanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
+    scanner.render(onScanSuccess, onScanFailure);
 
-  <button id="scrollToTopBtn" aria-label="Scroll to top" title="Scroll to top"
-    onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    ↑
-  </button>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
+    // Helper function to get CSRF token
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + "=")) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+  </script>
 </body>
 </html>

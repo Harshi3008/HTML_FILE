@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My QR Code</title>
+</head>
+<body>
+<h2>Welcome, {{ request.user.full_name }}</h2>
+  <p>Use this QR code to login:</p>
+  <img src="/generate-qr/" alt="QR Code">
+  <br>
+  <a href="/qr-login/">Go to QR Login</a>
+
+</body>
+</html>
