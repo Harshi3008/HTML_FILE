@@ -1,8 +1,9 @@
 from datetime import date
+from django.conf import settings
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout, get_user_model
 from django.contrib import messages
-from.models import add_category,book_detail, order, coustomer, suggested, issued_book, coustomers
+from.models import add_category,book_detail, order, customer, suggested, issued_book, customers
 from django.http import JsonResponse
 from django.contrib.auth import login
 from django.contrib.auth.models import User
@@ -11,7 +12,7 @@ from twilio.rest import Client
 import json
 import qrcode
 from django.http import HttpResponse
-import io
+import io, os
 import uuid
 
 
@@ -38,13 +39,13 @@ def admin_dashboard(request):
 
 def add_products(request):
     if request.method == "POST":
-        pname = request.POST['product_name']
-        pcategory = request.POST['product_category']
-        pdescription = request.POST['product_description']
+        bname = request.POST['book_name']
+        bcategory = request.POST['book_category']
+        bdescription = request.POST['book_description']
         price = request.POST['price']
         file = request.FILES['image']
-        book_detail(product_name=pname, product_category=pcategory, product_description=pdescription, price=price, image=file).save()
-        msg = "Product added"
+        book_detail(book_name=bname, book_category=bcategory, book_description=bdescription, price=price, image=file).save()
+        msg = "Book added"
         return render(request, 'admin/add_product.html', {'msg': msg})
     return render(request, 'admin/add_product.html')
 
@@ -57,7 +58,7 @@ def view_issued_book(request):
     return render(request, 'admin/view_issued_books.html', {'data': data})
 
 def view_customer(request):
-    data = coustomer.objects.all()
+    data = customer.objects.all()
     return render(request, 'admin/view_subscription.html', {'data': data})
 
 
@@ -117,7 +118,7 @@ def issue_books(request):
         if book_id and register_number:
             try:
                 book = book_detail.objects.get(id=book_id)
-                user = coustomer.objects.get(contact=register_number)
+                user = customer.objects.get(contact=register_number)
                 issued_book.objects.create(
                     book_name=book.product_name,
                     book_category=book.product_category,
@@ -127,7 +128,7 @@ def issue_books(request):
                 msg = f"Book '{book.product_name}' issued successfully."
             except book_detail.DoesNotExist:
                 msg = "Book not found."
-            except coustomer.DoesNotExist:
+            except customer.DoesNotExist:
                 msg = "User not found."
         else:
             msg = "Invalid request."
@@ -137,8 +138,8 @@ def issue_books(request):
         search_query = request.GET.get('search', '')
         if search_query:
             data = book_detail.objects.filter(
-                coustomer(product_name__icontains=search_query) |
-                coustomer(product_category__icontains=search_query)
+                customer(product_name__icontains=search_query) |
+                customer(product_category__icontains=search_query)
             )
         else:
             data = book_detail.objects.all()
@@ -148,8 +149,8 @@ def issue_book(request):
     if request.method=="POST":
         name=request.POST['name']
         email_id=request.POST['email']
-        if coustomer.objects.filter(email=email_id,name=name):
-            data=coustomer.objects.filter(email=email_id,name=name).get()
+        if customer.objects.filter(email=email_id,name=name):
+            data=customer.objects.filter(email=email_id,name=name).get()
             return redirect('book.html')
         else:
             msg="Invalid name or email"
@@ -183,49 +184,59 @@ def otp_verify(request):
 
 
 
-
-User = get_user_model()
-
 def memberships(request):
     if request.method == "POST":
         name = request.POST.get("name")
         email = request.POST.get("email")
         contact = request.POST.get("contact")
+        address = request.POST.get("address")
 
-        # Validations
-        if not name:
-            messages.error(request, "Full Name is required")
-            return render(request, "membership.html")
+        # Validation (basic)
+        if len(contact) != 10 or not contact.isdigit():
+            return render(request, "membership.html", {
+                "error": "Contact must be a 10-digit number."
+            })
+        if not email.endswith(".com"):
+            return render(request, "membership.html", {
+                "error": "Email must be valid and end with .com"
+            })
 
-        if not email and not contact:
-            messages.error(request, "Please provide at least Email or Phone")
-            return render(request, "membership.html")
+        # Check if customer already exists
+        if customer.objects.filter(email=email).exists():
+            return render(request, "membership.html", {
+                "error": "Email already registered. Please use a different email."
+            })
 
-        # Create user
-        username = email if email else contact  # use email/phone as username
-        if User.objects.filter(username=username).exists():
-            messages.error(request, "User already exists")
-            
-            return render(request, "membership.html")
-        
-        
-
-        user = User.objects.create_user(
-            username=username,
+        # Save customer
+        new_customer = customer(
+            name=name, 
             email=email,
-           
+            contact=contact,
+            address=address,
+            user_type='Customer',
+            is_active=True
         )
-        user.full_name = name
-        if contact:
-            user.contact = contact
-        user.save()
+        new_customer.save()
 
-        # Create QR secret
-        qr_secret = str(uuid.uuid4())
-        UserQR.objects.create(user=user, qr_secret=qr_secret)
+        # Generate QR code (for login later, using email + contact as data)
+        qr_data = f"{new_customer.email}|{new_customer.contact}"
+        qr_img = qrcode.make(qr_data)
 
-        login(request, user)  
-        return redirect("qr_code_page")
+        # Path to save QR
+        qr_path = os.path.join(settings.MEDIA_ROOT, f"qrcodes/{new_customer.id}.png")
+        os.makedirs(os.path.dirname(qr_path), exist_ok=True)
+        qr_img.save(qr_path)
+
+        # Save QR path in model
+        new_customer.qr_code = f"qrcodes/{new_customer.id}.png"
+        new_customer.save()
+
+        return render(request, "membership.html", {
+            "success": "Signup successful! Scan this QR for login.",
+            "qr_image": new_customer.qr_code
+        })
+    
+    # Default return for GET requests
     return render(request, "membership.html")
 
 
@@ -248,8 +259,8 @@ def logins(request):
     if request.method=="POST":
         name=request.POST['name']
         email_id=request.POST['email']
-        if coustomer.objects.filter(email=email_id,name=name):
-            data=coustomer.objects.filter(email=email_id,name=name).get()
+        if customer.objects.filter(email=email_id,name=name):
+            data=customer.objects.filter(email=email_id,name=name).get()
             user_type=data.user_type
             if user_type=='Admin':
                 request.session['email']=email_id
@@ -265,6 +276,9 @@ def logins(request):
 
 
 
+
+def qr_login_new(request):
+    return render(request, "qr_login.html")
 
 
 def qr_login_page(request):

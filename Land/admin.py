@@ -1,9 +1,9 @@
 from django.contrib import admin
-from.models import coustomer, add_category, book_detail, order, suggested, issued_book, UserQR, coustomers
+from.models import customer, add_category, book_detail, order, suggested, issued_book, UserQR, customers
 # Register your models here.
 class UserRegister(admin.ModelAdmin):
     list_display=["email"]
-admin.site.register(coustomer,UserRegister)
+admin.site.register(customer,UserRegister)
 
 class category_register(admin.ModelAdmin):
     list_display=["category_name"]
@@ -28,7 +28,7 @@ admin.site.register(suggested,suggestions)
 
 class otp(admin.ModelAdmin):
     list_display=["contact"]
-admin.site.register(coustomers,otp)
+admin.site.register(customers,otp)
 
 
 class user(admin.ModelAdmin):
