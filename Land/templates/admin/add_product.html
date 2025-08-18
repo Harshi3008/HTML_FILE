@@ -36,44 +36,44 @@
 			</div>
 <!--heder end here-->
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Home</a><i class="fa fa-angle-right"></i>Product<i class="fa fa-angle-right"></i>Add Product</li>
+    <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Home</a><i class="fa fa-angle-right"></i>Book<i class="fa fa-angle-right"></i>Add Book</li>
 </ol>
 <div class="grid-form1">
 	<h3 id="forms-controls-static">Add product</h3>
 	<form action="{% url 'add product' %}" enctype="multipart/form-data" method="post" class="form-horizontal">
 		{% csrf_token %}
 	  <div class="form-group">
-		<label class="col-sm-2 control-label hor-form">Product name</label>
+		<label class="col-sm-2 control-label hor-form">Book name</label>
 		<div class="col-sm-10">
-		  <input type="text" name="product_name" class="form-control" id="inputname" placeholder="product name">
+		  <input type="text" name="product_name" class="form-control" id="inputname" placeholder="Book Name">
 		</div>
 	  </div>
 	  <div class="form-group">
 		<label class="col-sm-2 control-label hor-form">Category</label>
 		<div class="col-sm-10">
-		  <input type="category" name="product_category" class="form-control" id="inputprice" placeholder="category">
+		  <input type="category" name="product_category" class="form-control" id="inputprice" placeholder="Category">
 		</div>
 	  </div>
       <div class="form-group">
-		<label class="col-sm-2 control-label hor-form">Product Description</label>
+		<label class="col-sm-2 control-label hor-form">Book Description</label>
 		<div class="col-sm-10">
-		  <input type="text" name="product_description" class="form-control" id="inputdescription" placeholder="Dispriction">
+		  <input type="text" name="product_description" class="form-control" id="inputdescription" placeholder="Book Dispriction">
 		</div>
 	  </div>
       <div class="form-group">
 		<label class="col-sm-2 control-label hor-form">Price</label>
 		<div class="col-sm-10">
-		  <input type="number" name="price" class="form-control" id="inputprice" placeholder="price">
+		  <input type="number" name="price" class="form-control" id="inputprice" placeholder="Price">
 		</div>
 	  </div>
 	  <div class="form-group">
-		<label class="col-sm-2 control-label hor-form">Product image</label>
+		<label class="col-sm-2 control-label hor-form">Book image</label>
 		<div class="col-sm-10">
-		  <input type="file" name="image" class="form-control" id="inputprice" placeholder="price">
+		  <input type="file" name="image" class="form-control" id="inputprice" placeholder="Book image">
 		</div>
 	  </div>
 	  
-      <button type="submit" class="btn btn-primary">Add Product</button>
+      <button type="submit" class="btn btn-primary">Add Book</button>
 	  {{msg}}
 	</form>
 										

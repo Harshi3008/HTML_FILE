@@ -39,4 +39,12 @@ urlpatterns = [
  
     path('login', views.logins, name='login'),
 
+    path("qr-login/", views.qr_login_page, name="qr_login_page"),
+    path("login-qr/", views.qr_login_verify, name="qr_login_verify"),
+
+    path("my-qr/", views.qr_code_page, name="qr_code_page"),
+    path("generate-qr/", views.generate_qr, name="generate_qr"),
+
+
+
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
