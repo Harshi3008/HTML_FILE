@@ -56,14 +56,14 @@ class Book(models.Model):
     def __str__(self):
         return f"{self.title} - {self.author}"
 
-class issued_book(models.Model):
+class Issued_book(models.Model):
     name=models.CharField(max_length=20)
     contact=models.CharField(max_length=10)
     title=models.CharField(max_length=50)
     category=models.CharField(max_length=40)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    issue_date = models.DateField(auto_now_add=True)
-    return_date = models.DateField(max_length=10)
+    issue_date = models.DateField(default=timezone.now)
+    return_date = models.DateField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         # Auto set return_date to 15 days later if not given

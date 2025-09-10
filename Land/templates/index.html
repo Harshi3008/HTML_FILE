@@ -79,12 +79,13 @@
     <!-- Navbar -->
     <header>
       <nav class="navbar navbar-expand-lg">
-        <ul class="navbar-nav"> 
+        <ul class="navbar-nav">
               <a class="nav-link" href="{% url 'index' %}">Home</a>
               <a class="nav-link" href="{% url 'about' %}">About</a>
               <a class="nav-link" href="{% url 'book' %}">Books</a>
               <a class="nav-link" href="{% url 'events' %}">Event</a>
               <a class="nav-link" href="{% url 'blog_list' %}">Blog</a>
+              <a class="nav-link" href="{% url 'team' %}">Team</a>
         </ul>
         <ul class="navbar-nav ms-auto">        
             <a class="nav-link" href="{% url 'login' %}">Login</a>
@@ -116,30 +117,25 @@
    <!-- Blogs, Videos, Events -->
     <div class="container my-5">
       <div class="row">
-        <div class="col-md-3 scrollable">
+        <div class="col-md-3 scrollable" style="overflow-y: auto; max-height: 600px;">
           <h4>Blogs</h4>
           {% if blogs %}
-            <!-- Display first blog -->
-            <div>
-              {% if blogs.0.image %}
-                <img src="{{ blogs.0.image.url }}" class="img-fluid mb-2">
-              {% endif %}
-              <h5>{{ blogs.0.title }}</h5>
-              <p>{{ blogs.0.content|truncatewords:15 }}</p>
-            </div>
-            {% if blogs|length > 1 %}
-              <div class="owl-carousel owl-theme blog-carousel">
-                {% for blog in blogs|slice:"1:" %}
-                  <div class="item">
-                    {% if blog.image %}
-                      <img src="{{ blog.image.url }}" class="img-fluid">
-                    {% endif %}
-                    <h5>{{ blog.title }}</h5>
-                    <p>{{ blog.content|truncatewords:15 }}</p>
+            <div class="owl-carousel owl-theme blog-carousel">
+              {% for blog in blogs|slice:":5" %}
+                <div class="item d-flex" style=" padding: 2px;">
+                  <div style="flex: 1; display: flex; flex-direction: column; : 1px solid #000; padding-right: 2px;">
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                      {% if blog.image %}
+                        <img src="{{ blog.image.url }}" class="img-fluid" style="max-width: 100px; height: auto;">
+                      {% endif %}
+                      <h5 style="align-self: center; margin: 0;">
+                        <a href="{% url 'blog_list' %}" class="text-decoration-none">{{ blog.title }}</a>
+                      </h5>
+                    </div>
                   </div>
-                {% endfor %}
-              </div>
-            {% endif %}
+                </div>
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
 
@@ -154,8 +150,10 @@
           <h4>Events</h4>
           {% for event in events %}
             <div>
-              <img src="{{ event.image.url }}" class="img-fluid">
-              <h5>{{ event.title }}</h5>
+              <a href="{% url 'events' %}">
+                <img src="{{ event.image.url }}" class="img-fluid" style="max-width: 150px; height: auto;">
+              </a>
+              <h5><a href="{% url 'events' %}" class="text-decoration-none">{{ event.title }}</a></h5>
               <p>{{ event.date }}</p>
             </div>
           {% endfor %}
@@ -254,26 +252,71 @@
                <h5> Javitri Sahu</h5> <br>Chairman, BHAI JI FOUNDATION
               </div>
             </div>
-              <div class="card"><div class="card-body text-center">
-                <img src="{% static 'images/TA.jpg' %}" class="img-fluid" alt="Book 1"><br>
-               <h5> Tauseef Alam</h5> <br>Community Head
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/HH.jpg' %}" class="img-fluid" alt="Book 1"><br>
+               <h5> Harshita Verma </h5> <br>Trustee, Technical head
+            </div>
+            </div>
+              
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/GS.jpg' %}" class="img-fluid" alt="Book 1"><br>
+               <h5> Dr. Gauri Sahu</h5> <br>MD, KPMC
+            </div>
+            </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/KK.jpg' %}" class="img-fluid" alt="Book 1"><br>
+               <h5> Krishna Kant Verma </h5> <br>Writer
+            </div>
+            </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/AS.jpg' %}" class="img-fluid" alt="Book 1"><br>
+               <h5> Karna Bhaiji </h5> <br>Reiki Grand Master
+            </div>
+            </div>
+          <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/BM.jpg' %}" class="img-fluid" alt="Book 1"><br>
+               <h5>Braj mohan patel </h5> <br>Technical advisor
+
               </div>
             </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/SR.jpg' %}" class="img-fluid" alt="Book 1"><br>
+               <h5> Shailraj </h5> <br> Event head
+              </div>
+            </div>
+            
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/TU.jpg' %}" class="img-fluid" alt="Book 1"><br>
+               <h5> Tauseef Alam </h5> <br> Community head
+              </div>
+            </div>
+            
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/BHABHI.jpg' %}" class="img-fluid" alt="Book 1"><br>
+               <h5> Anjana Verma </h5> <br>Volunteering Coordinator
+              </div>
+            </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/GSS.jpg' %}" class="img-fluid" alt="Book 1"><br>
+               <h5> Jigisha srivastava </h5> <br>Scientist ISRO
+              </div>
+              </div>
             <div class="card"><div class="card-body text-center">
                 <img src="{% static 'images/AV.jpg' %}" class="img-fluid" alt="Book 1"><br>
-               <h5> Prof. Ashwin Kumar Kushwaha </h5> <br>Assi. Professor, Department of Library and Information Science, University of Jammu
+               <h5> Prof. Ashwin Kumar Kushwaha </h5> <br>Assi. Professor, Department of Library and Information Science
               </div>
             </div>
             <div class="card"><div class="card-body text-center">
-                <img src="{% static 'images/GM.jpg' %}" class="img-fluid" alt="Book 1"><br>
-               <h5> Dr Govind Maurya </h5> <br>Project Research Scientist, IIT Bombay
+                <img src="{% static 'images/MG.jpg' %}" class="img-fluid" alt="Book 1"><br>
+               <h5> Dr Govind Maurya  </h5> <br>Project Research Scientist, IIT Bombay
               </div>
             </div>
             <div class="card"><div class="card-body text-center">
-                <img src="{% static 'images/KR.jpg' %}" class="img-fluid" alt="Book 1"><br>
+                <img src="{% static 'images/RK.jpg' %}" class="img-fluid" alt="Book 1"><br>
                <h5> Krishna Rajora </h5> <br>Library Assistant, Sahitya Akademi
               </div>
             </div>
+
         </div>
     </div>
 
@@ -304,7 +347,6 @@
                 <div class="col-md-4 mb-4">
                     <h4>Follow Us</h4>
                     <a href="https://www.facebook.com/share/1B8gzCaQYS/?mibextid=wwXIfr" class="text-white me-3"><i class="fa fa-facebook"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fa fa-twitter"></i></a>
                     <a href="https://www.instagram.com/literary__land?igsh=YzljYTk1ODg3Zg==" class="text-white me-3"><i class="fa fa-instagram"></i></a>
                     <a href="https://youtube.com/@literaryland_bft?feature=shared" class="text-white me-3"><i class="fa fa-youtube"></i></a>
                 </div>

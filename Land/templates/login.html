@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,38 +124,10 @@
             border-radius: 10px;
             margin: 20px 0;
         }
-
-        .django-messages {
-            margin: 20px 0;
-        }
-
-        .django-message {
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-        }
-
-        .django-message.success {
-            background: rgba(76, 175, 80, 0.3);
-            border: 1px solid rgba(76, 175, 80, 0.5);
-        }
-
-        .django-message.error {
-            background: rgba(244, 67, 54, 0.3);
-            border: 1px solid rgba(244, 67, 54, 0.5);
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        {% if messages %}
-        <div class="django-messages">
-            {% for message in messages %}
-            <div class="django-message {{ message.tags }}">{{ message }}</div>
-            {% endfor %}
-        </div>
-        {% endif %}
         <h1>QR Code Login</h1>
         <p class="subtitle">Position your QR code in the camera view</p>
         
@@ -170,7 +141,7 @@
         </div>
         
         <div class="manual-login">
-            <a href="/login">Login with username/password instead</a>
+            <a href="login">Login with username/password instead</a>
         </div>
     </div>
 
@@ -191,7 +162,7 @@
             statusDiv.innerHTML = 'QR Code detected! Logging you in...';
             
             // Send the QR code data to the server for verification
-            fetch('/login-qr', {
+            fetch('login-qr', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -204,7 +175,7 @@
                 if (data.success) {
                     statusDiv.innerHTML = 'Login successful! Redirecting...';
                     setTimeout(() => {
-                        window.location.href = '/user_dashboard'; // Redirect to user dashboard
+                        window.location.href = 'user-dashboard';
                     }, 1500);
                 } else {
                     statusDiv.className = 'status error';
@@ -259,7 +230,7 @@
                 fps: 10,
                 qrbox: { width: 250, height: 250 },
                 aspectRatio: 1.0,
-                disableFlip: false 
+                disableFlip: false
             };
             
             Html5Qrcode.getCameras().then(cameras => {

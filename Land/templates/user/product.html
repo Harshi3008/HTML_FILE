@@ -43,11 +43,7 @@
                             <p class="card-text"><strong>Price:</strong> {{ book.price }}</p>
                             <p class="card-text"><strong>Available Copies:</strong> {{ book.available_copies }}</p>
                             {% if book.available_copies > 0 %}
-                            <form method="post" action="{% url 'issue' %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="book_id" value="{{ book.id }}">
-                                <button type="submit" class="btn btn-primary">Issue Book</button>
-                            </form>
+
                             {% else %}
                             <button class="btn btn-secondary" disabled>Not Available</button>
                             {% endif %}

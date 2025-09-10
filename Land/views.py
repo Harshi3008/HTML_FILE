@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import authenticate,login,logout, get_user_model
 from django.contrib import messages
-from.models import add_category,Issue, Blog, Event, Team, User, suggested, issued_book, otp, Contact, Book, PreBooking, Donation
+from.models import add_category,Issue, Blog, Event, Team, User, suggested, Issued_book, otp, Contact, Book, PreBooking, Donation
 # Remove import of django.contrib.auth.models.User
 # from django.contrib.auth.models import User
 from .models import User, UserQR
@@ -98,7 +98,7 @@ def view_products(request):
     return render(request, 'admin/view_product.html', {'data': data})
 
 def view_issued_book(request):
-    data = issued_book.objects.all()
+    data = Issued_book.objects.all()
     return render(request, 'admin/view_issued_books.html', {'data': data})
 
 def view_customer(request):
@@ -135,7 +135,7 @@ def user_dashboard(request):
 
 def view_books(request):
     data = Book.objects.all()
-    return render(request, 'book.html', {'data': data})
+    return render(request, 'user/product.html', {'data': data})
 
 
 def about(request):
@@ -214,7 +214,7 @@ def donated(request):
     return render(request, 'admin/donated.html', {'donations': donations})
 
 @login_required
-def issue_books(request):
+def issue_books(request, book_id=None):
     if request.method == 'POST':
         form_type = request.POST.get('form_type')
         if form_type == 'manual_issue':
@@ -310,6 +310,19 @@ def issue_books(request):
             issues = []
         template = 'user/issue book.html' if request.resolver_match.url_name == 'issue book' else 'user/issue.html'
         return render(request, template, {'data': data, 'issues': issues})
+
+@login_required
+def my_issued_books(request):
+    custom_user = get_object_or_404(User, email=request.user.email)
+    issued_books = Issue.objects.filter(user=custom_user, is_returned=False).order_by('-issue_date')
+
+    today = timezone.now().date()
+    for issued in issued_books:
+        days_since_issue = (today - issued.issue_date).days
+        issued.can_reissue = 5 <= days_since_issue <= 14  # dynamic attribute
+
+    return render(request, "my_issued_books.html", {"issued_books": issued_books})
+
 
 @login_required
 def reissue_book(request, issue_id):
@@ -420,23 +433,28 @@ def logins(request):
 def qr_login_new(request):
     return render(request, "qr_login.html")
 
-
 def qr_login_page(request):
     return render(request, "login.html")
 
 def qr_login_verify(request):
+    import logging
+    logger = logging.getLogger(__name__)
     if request.method == "POST":
         data = json.loads(request.body)
         qr_data = data.get("qrData")
+        logger.info(f"QR login attempt with data: {qr_data}")
 
         try:
             user_qr = UserQR.objects.get(qr_secret=qr_data)
             user = user_qr.user
             login(request, user)  # Django login
+            logger.info(f"User {user} logged in successfully via QR")
             return JsonResponse({"success": True})
         except UserQR.DoesNotExist:
+            logger.warning(f"QR login failed: no user with qr_secret {qr_data}")
             return JsonResponse({"success": False})
 
+    logger.error("QR login failed: invalid request method")
     return JsonResponse({"success": False, "error": "Invalid request"})
 
 
@@ -595,6 +613,9 @@ def memberships(request):
 
 def terms_and_conditions(request):
     return render(request, 'terms_and_conditions.html')
+
+def team(request):
+    return render(request, 'team.html')
 
 from django.db import IntegrityError
 

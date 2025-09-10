@@ -1,5 +1,5 @@
 from django.contrib import admin
-from.models import User,Blog, Event,Book, Issue, Team, add_category, suggested, issued_book, UserQR, otp, Donation
+from.models import User,Blog, Event,Book, Issue, Team, add_category, suggested, Issued_book, UserQR, otp, Donation
 # Register your models here.
 class UserRegister(admin.ModelAdmin):
     list_display=["email"]
@@ -15,7 +15,7 @@ admin.site.register(Book,book_register)
 
 class issued(admin.ModelAdmin):
     list_display=["name"]
-admin.site.register(issued_book,issued)
+admin.site.register(Issued_book,issued)
 
 
 class suggestions(admin.ModelAdmin):
