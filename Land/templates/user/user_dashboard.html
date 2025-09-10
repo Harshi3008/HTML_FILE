@@ -21,69 +21,120 @@
 <!-- lined-icons -->
 <link rel="stylesheet" href="{% static 'user/css/icon-font.min.css' %}" type='text/css' />
 <!-- //lined-icons -->
+ <style>
+    .user-avatar {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+	body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff6f00;
+    }
+
+    /* Profile Section */
+    .profile-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #ccc;
+      object-fit: cover;
+    }
+
+    /* Dropdown Menu */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      width: 220px;
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    .dropdown-header {
+      padding: 15px;
+      background: #f8f8f8;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .dropdown-item {
+      padding: 12px 15px;
+      text-decoration: none;
+      color: #333;
+      display: block;
+      transition: background 0.3s;
+    }
+
+    .dropdown-item:hover {
+      background: #f0f0f0;
+    }
+  </style>
+
 </head> 
 
 <body>
-	<div class="page-container">
-		<!--/content-inner-->
-		<div class="left-content">
-			<div class="mother-grid-inner">
-				<!--header start here-->
-				<div class="header-main">
-					<div class="logo-w3-agile">
-						<h1><a href="{% url 'user_dashboard' %}">Literary Land</a></h1>
-					</div>
-					
-					<div class="clearfix"> </div>	
-				</div>
-				<!--heder end here-->
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="{% url 'user_dashboard' %}">Home</a> <i class="fa fa-angle-right"></i></li>
-				</ol>
-				<!--four-grids here-->
-				
-					<div class="clearfix"></div>
-				</div>
-				<div class="grid-form1">
-					<h3 id="forms-controls-static">Feedback</h3>
-					<form class="form-horizontal" action="{% url 'user_dashboard' %}" method="post">	
-						{% csrf_token %}
-						<div class="form-group">
-							<label class="col-sm-2 control-label hor-form">Name</label>
-							<div class="col-sm-10">
-								<input type="text" name="order_id" class="form-control" id="inputname" placeholder="Name">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label hor-form">Email</label>
-							<div class="col-sm-10">
-								<input type="email" name="email" class="form-control" id="inputemail" placeholder="enter your email">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label hor-form">Contact</label>
-							<div class="col-sm-10">
-								<input type="email" name="email" class="form-control" id="inputcontact" placeholder="enter your contact">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label hor-form">Message</label>
-							<div class="col-sm-10">
-								<input type="text" name="message" class="form-control" id="inputname" placeholder="Make a message">
-							</div>
-						</div>
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</form>
+	 <div class="navbar">
+    <div class="logo">My Dashboard</div>
+    <div class="profile-container">
+      <h3 class="mb-4">Welcome, {{ user.name }} <alt="User" class="profile-icon" id="profileIcon"> </h3>
+    </div>
+  </div>
 
-				<div class="clearfix"> </div>
-			</div>
-				
-				<div class="copyrights">
-					<p>© 2025 Literary Land. All Rights Reserved </p>
-				</div>
-				<!--COPY rights end here-->
-			</div>
-		</div>
+  <script>
+
+
+    // Update user info dynamically
+    document.getElementById("userName").innerText = user.name;
+    document.getElementById("profileIcon").src = user.profilePic;
+
+    // Dropdown toggle
+    const profileIcon = document.getElementById("profileIcon");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    profileIcon.addEventListener("click", () => {
+      dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener("click", (e) => {
+      if (!e.target.closest(".profile-container")) {
+        dropdownMenu.style.display = "none";
+      }
+    });
+  </script>
+
+
+
+
 		<!--//content-inner-->
 		<!--/sidebar-menu-->
 		<div class="sidebar-menu">
@@ -105,7 +156,14 @@
 								suggested book</span>
 							<div class="clearfix"></div>
 						</a></li>
+					<li><a href="{% url 'issue book' %}"><i class="fa fa-image" aria-hidden="true"></i> <span>Issue book</span>
+							<div class="clearfix"></div>
+						</a></li>
 					
+					<li><a href="{% url 'issue' %}"><i class="fa fa-image" aria-hidden="true"></i> <span>Issue</span>
+							<div class="clearfix"></div>
+						</a></li>
+
 						<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>  <span>Logout</span><div class="clearfix"></div></a></li>
 					</li>
 				</ul>

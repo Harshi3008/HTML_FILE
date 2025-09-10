@@ -1,0 +1,4 @@
+- [x] Modify views.py issue_books view to render different templates based on URL name
+- [x] Update Land/templates/user/issue book.html to display book list with details and issue buttons
+- [x] Update Land/templates/user/issue.html to have a form for issuing books
+- [x] Test the functionality

@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Terms and Conditions - Literary Land</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #3f1239;
+        }
+        .language-tabs {
+            margin-bottom: 1rem;
+        }
+        .language-tabs button {
+            background-color: #5995fd;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin-right: 5px;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            font-weight: bold;
+        }
+        .language-tabs button.active {
+            background-color: #4481eb;
+        }
+        .terms-content {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            border-radius: 0 5px 5px 5px;
+        }
+        .hidden {
+            display: none;
+        }
+        a.back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #4481eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function showLanguage(lang) {
+            document.getElementById('english').classList.add('hidden');
+            document.getElementById('hindi').classList.add('hidden');
+            document.getElementById(lang).classList.remove('hidden');
+
+            document.getElementById('btn-english').classList.remove('active');
+            document.getElementById('btn-hindi').classList.remove('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+        }
+        window.onload = function() {
+            showLanguage('english');
+        };
+    </script>
+</head>
+<body>
+    <h1>Terms and Conditions / नियम और शर्तें</h1>
+    <div class="language-tabs">
+        <button id="btn-english" onclick="showLanguage('english')">English</button>
+        <button id="btn-hindi" onclick="showLanguage('hindi')">हिन्दी</button>
+    </div>
+    <div id="english" class="terms-content">
+        <h2>Terms and Conditions</h2>
+        <p>Welcome to Literary Land. By using our services, you agree to the following terms and conditions:</p>
+        <ul>
+            <li>You must provide accurate and truthful information during signup and donation.</li>
+            <li>Your membership and donations are subject to approval by Literary Land.</li>
+            <li>Books donated become the property of Literary Land and may be used or distributed at our discretion.</li>
+            <li>Membership privileges may be revoked for violation of library rules or misconduct.</li>
+            <li>We reserve the right to update these terms at any time without prior notice.</li>
+        </ul>
+        <p>For any questions, please contact us at literaryland.bft@gmail.com.</p>
+    </div>
+    <div id="hindi" class="terms-content hidden">
+        <h2>नियम और शर्तें</h2>
+        <p>लिटरेरी लैंड में आपका स्वागत है। हमारी सेवाओं का उपयोग करके, आप निम्नलिखित नियमों और शर्तों से सहमत होते हैं:</p>
+        <ul>
+            <li>साइनअप और दान के दौरान आपको सही और सच्ची जानकारी प्रदान करनी होगी।</li>
+            <li>आपकी सदस्यता और दान लिटरेरी लैंड द्वारा अनुमोदित होने के अधीन हैं।</li>
+            <li>दान की गई पुस्तकें लिटरेरी लैंड की संपत्ति बन जाती हैं और हमारे विवेक पर उपयोग या वितरण की जा सकती हैं।</li>
+            <li>पुस्तकालय के नियमों का उल्लंघन या अनुचित व्यवहार करने पर सदस्यता रद्द की जा सकती है।</li>
+            <li>हम बिना पूर्व सूचना के इन नियमों को कभी भी अपडेट करने का अधिकार सुरक्षित रखते हैं।</li>
+        </ul>
+        <p>किसी भी प्रश्न के लिए, कृपया हमसे संपर्क करें: literaryland.bft@gmail.com।</p>
+    </div>
+    <a href="{% url 'membership' %}" class="back-link">← Back to Membership</a>
+</body>
+</html>

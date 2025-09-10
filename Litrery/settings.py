@@ -22,11 +22,18 @@ STATIC_DIR=os.path.join(BASE_DIR,"/static")
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-fb!geo==2ggg9ewvjsj0eo#(!3vjexf#@zil@lmg0g9*4c0z69'
+
+# Razorpay credentials
+RAZORPAY_KEY_ID = "your_key_id"
+RAZORPAY_KEY_SECRET = "your_key_secret"
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -73,6 +80,11 @@ TEMPLATES = [
         },
     },
 ]
+# settings.py
+
+TEMPLATES[0]["DIRS"] = [BASE_DIR / "templates"]
+
+
 
 WSGI_APPLICATION = 'Litrery.wsgi.application'
 

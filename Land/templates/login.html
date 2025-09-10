@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,10 +125,38 @@
             border-radius: 10px;
             margin: 20px 0;
         }
+
+        .django-messages {
+            margin: 20px 0;
+        }
+
+        .django-message {
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .django-message.success {
+            background: rgba(76, 175, 80, 0.3);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .django-message.error {
+            background: rgba(244, 67, 54, 0.3);
+            border: 1px solid rgba(244, 67, 54, 0.5);
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        {% if messages %}
+        <div class="django-messages">
+            {% for message in messages %}
+            <div class="django-message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
         <h1>QR Code Login</h1>
         <p class="subtitle">Position your QR code in the camera view</p>
         
