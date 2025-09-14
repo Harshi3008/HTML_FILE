@@ -150,10 +150,31 @@
     
     <script>
         let html5QrCode = null;
-        
+        let scanning = false;
+        let handledSuccess = false;
+        let failureLogTs = 0;
+
+        function logStatus(type, msg) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.style.display = 'block';
+            statusDiv.className = 'status ' + (type === 'success' ? 'success' : 'error');
+            statusDiv.innerHTML = msg;
+        }
+
+        async function safeStop() {
+        if (html5QrCode && scanning) {
+            try { await html5QrCode.stop(); } catch(e) { /* ignore */ }
+            scanning = false;
+        }
+        }
         // Function to handle successful QR scan
-        function onScanSuccess(decodedText, decodedResult) {
+        async function onScanSuccess(decodedText, decodedResult) {
+            if (handledSuccess) return;       // debounce
+            handledSuccess = true;
+            await safeStop();                 // STOP FIRST to avoid races
             console.log("QR Code scanned:", decodedText);
+            logStatus('success', 'QR Code detected! Logging you in...');
+
             
             // Show success message
             const statusDiv = document.getElementById('status');
@@ -172,10 +193,11 @@
             })
             .then(response => response.json())
             .then(data => {
+                console.log('Server response:', data);
                 if (data.success) {
                     statusDiv.innerHTML = 'Login successful! Redirecting...';
                     setTimeout(() => {
-                        window.location.href = 'user-dashboard';
+                        window.location.href = 'user_dashboard';
                     }, 1500);
                 } else {
                     statusDiv.className = 'status error';
@@ -199,8 +221,13 @@
         
         // Function to handle scan failure
         function onScanFailure(error) {
-            // Handle scan failure, usually better to ignore and keep scanning
-            console.warn("Scan error:", error);
+            // Throttle logs to once per 2s (optional)
+            const now = Date.now();
+            if (now - failureLogTs > 2000) {
+                console.warn("Scan warning:", (error && error.message) || error);
+                failureLogTs = now;
+            }
+            // Don’t restart here; html5-qrcode continues automatically
         }
         
         // Function to get CSRF token
@@ -216,6 +243,8 @@
                     }
                 }
             }
+            console.log('value of cookoe---->'+cookieValue);
+            logStatus('value of cookie', cookieValue);
             return cookieValue;
         }
         

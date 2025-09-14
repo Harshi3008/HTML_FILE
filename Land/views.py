@@ -445,13 +445,20 @@ def qr_login_verify(request):
         logger.info(f"QR login attempt with data: {qr_data}")
 
         try:
+            logger.warning(f"value of user_qr-before{qr_data}")
+            logger.warning(f"value of user_qr-before{UserQR.objects.all()}")
+            
+            for i in UserQR.objects.all():
+                logger.warning(f"value of user_qr-all{i.qr_secret}")
             user_qr = UserQR.objects.get(qr_secret=qr_data)
+
+            logger.warning(f"value of user_qr{user_qr}")
             user = user_qr.user
             login(request, user)  # Django login
             logger.info(f"User {user} logged in successfully via QR")
             return JsonResponse({"success": True})
         except UserQR.DoesNotExist:
-            logger.warning(f"QR login failed: no user with qr_secret {qr_data}")
+            logger.warning(f"QR login failed: no user with qr_secret {qr_data} ")
             return JsonResponse({"success": False})
 
     logger.error("QR login failed: invalid request method")
