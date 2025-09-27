@@ -29,20 +29,25 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-fb!geo==2ggg9ewvjsj0eo#(!3vjexf#@zil@lmg0g9*4c0z69'
 
-# Security settings for development
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-SECURE_HSTS_SECONDS = 0
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-SECURE_HSTS_PRELOAD = False
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
+# Security settings for production
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Allow all hosts in development
-ALLOWED_HOSTS = ['*']
+# Allowed hosts
+ALLOWED_HOSTS = [
+    'l-51tq.onrender.com',
+    'www.l-51tq.onrender.com',
+    '127.0.0.1',
+    'localhost'
+]
 
-# Development settings
-DEBUG = True
+# Debug mode - set to False in production
+DEBUG = False
 
 INSTALLED_APPS = [
     'django.contrib.admin',
