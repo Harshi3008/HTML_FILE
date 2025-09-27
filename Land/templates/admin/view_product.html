@@ -80,55 +80,79 @@
 
 </head>
 <body>
-	 <div class="topbar">
-      <a href="{% url 'membership' %}" tabindex="0">Membership</a>
-      <a href="{% url 'contributions' %}" tabindex="0">Contributions</a>
-      <a href="{% url 'issue book' %}" tabindex="0">Issue Books</a>
-      <a href="{% url 'contact' %}" tabindex="0">Contact</a>
-    </div>
-
-
-    <nav aria-label="Primary navigation">
-      <a href="{% url 'index'%}" tabindex="0">Home</a>
-      <a href="{% url 'book' %}" tabindex="0">Books</a>
-      <a href="{% url 'events' %}" tabindex="0">Events</a>
-      <a href="{% url 'about' %}" tabindex="0">About</a>
-      <a href="{% url 'contact' %}" tabindex="0">Contact</a>
-    </nav>
-    <hr>
+	
     <h1 class="head fw-bold fs-1 text-center">Books</h1>
   <main class="container" role="main" aria-label="Book page">
     <header class="header">
        
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="index.html">Home</a> &gt; <span aria-current="page">Book</span>
+        <a href="index.html">Home</a> &gt; <span aria-current="page">Books</span>
       </nav>
 
     </header>
 
 			<!--heder end here-->
 			
-			<div class="row"></div>
-			{% for i in data %}
-			<div class="col-lg-3 col-sm-12">
-				<div class="card">
-					<div class="card-header">
-						<img src="{{i.image.url}}" class="d-block w-100 img" alt="">
-					</div>
-					<div class="card-body">
-						<h3>{{i.product_name}}</h3>
-						<p>{{i.price}}</p>
-					</div>
-					<div class="card-footer">
-						<a href="" class="btn btn-info">Buy</a>
+			<div class="row">
+				{% for i in data %}
+				<div class="col-lg-3 col-sm-12">
+					<div class="card">
+
+						<div class="card"><div class="card-body text-center">
+							<h3>{{i.title}}</h3>
+							<p>Price: {{i.price}}</p>
+						</div>
 					</div>
 				</div>
 			</div>
-
-
 			</tr>
 			{% endfor %}
 		</div>
+
+						<div class="sidebar-menu">
+			<header class="logo1">
+				<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> 
+			</header>
+				<div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
+				   <div class="menu">
+							<ul id="menu" >
+								<li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-tachometer"></i> <span>Dashboard</span><div class="clearfix"></div></a></li>
+								
+								 <li id="menu-academico" ><a href="#"><i class="fa fa-navicon" aria-hidden="true"></i><span> Book </span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
+									<ul id="menu-academico-sub" >
+									<li id="menu-academico-avaliacoes" ><a href="{% url 'add product' %}">Add Book</a></li>
+									 <li id="menu-academico-avaliacoes" ><a href="{% url 'view product' %}">View Book</a></li>
+								   </ul>
+								 </li>
+								 <li><a href="{% url 'view issued_book' %}"><i class="fa fa-eye"></i>  <span>View issued books</span><div class="clearfix"></div></a></li>
+									
+								<li id="menu-academico" ><a href="{% url 'view customer' %}"><i class="fa fa-eye"></i><span>View Subscription</span><div class="clearfix"></div></a></li>
+								
+						
+								<li><a href="{% url 'suggested book' %}"><i class="fa fa-eye"></i> <span>Suggested book</span>
+										<div class="clearfix"></div>
+									</a></li>
+								<li><a href="{% url 'write_blog' %}"><i class="fa fa-eye"></i> <span>Write Blog</span>
+										<div class="clearfix"></div>
+									</a></li>
+								<li><a href="{% url 'event' %}"><i class="fa fa-eye"></i> <span>Event</span>
+										<div class="clearfix"></div>
+									</a></li>
+								<li><a href="{% url 'donated' %}"><i class="fa fa-gift"></i> <span>Donated Books</span>
+										<div class="clearfix"></div>
+									</a></li>
+								<li><a href="{% url 'feedback' %}"><i class="fa fa-gift"></i> <span>Feedback</span>
+										<div class="clearfix"></div>
+									</a></li>
+								<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> <span>Logout</span>
+										<div class="clearfix"></div>
+									</a></li>
+								</li>
+							</ul>
+					</div>
+							  </div>
+							  <div class="clearfix"></div>		
+							</div>
 
 
 

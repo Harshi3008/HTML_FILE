@@ -276,34 +276,6 @@
       font-size: 0.9rem;
     }
 
-    /* Stats Section */
-    .stats-section {
-      text-align: center;
-      max-width: 900px;
-      margin: 2rem auto 6rem auto;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .stat-item {
-      flex: 1 1 160px;
-      background-color: #efefef;
-      border-radius: 10px;
-      padding: 1rem 0.8rem;
-      font-weight: 700;
-      box-shadow: 0 0 4px rgb(0 0 0 / 0.05);
-    }
-    .stat-number {
-      font-size: 1.4rem;
-      color: #6e4b23;
-      margin-bottom: 0.3rem;
-    }
-    .stat-text {
-      font-size: 0.8rem;
-      color: #333;
-    }
-
     /* Happenings section */
     .happenings-section {
       max-width: 900px;
@@ -941,6 +913,7 @@ input[type="email"] {
       display: block;
     }
 
+  
     /* Responsive */
     @media (max-width: 900px) {
       main {

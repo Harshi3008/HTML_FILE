@@ -26,18 +26,8 @@
    <!--/content-inner-->
 <div class="left-content">
 	   <div class="mother-grid-inner">
-            <!--header start here-->
-			<div class="header-main">
-				<div class="logo-w3-agile">
-					<h1><a href="{% url 'admin_dashboard' %}">Literary Land</a></h1>
-				</div>                    
-
-				<div class="clearfix"> </div>
-			</div>
+            
 <!--heder end here-->
-<ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Home</a><i class="fa fa-angle-right"></i>Book<i class="fa fa-angle-right"></i>Add Book</li>
-</ol>
 <div class="grid-form1">
 	<h3 id="forms-controls-static">Add product</h3>
 	<form action="{% url 'add product' %}" enctype="multipart/form-data" method="post" class="form-horizontal">
@@ -45,19 +35,25 @@
 	  <div class="form-group">
 		<label class="col-sm-2 control-label hor-form">Book name</label>
 		<div class="col-sm-10">
-		  <input type="text" name="product_name" class="form-control" id="inputname" placeholder="Book Name">
+		  <input type="text" name="book_name" class="form-control" id="inputname" placeholder="Book Name">
+		</div>
+	</div>	
+	<div class="form-group">
+		<label class="col-sm-2 control-label hor-form">Author name</label>
+		<div class="col-sm-10">
+		  <input type="category" name="author" class="form-control" id="inputprice" placeholder="Author name">
 		</div>
 	  </div>
 	  <div class="form-group">
 		<label class="col-sm-2 control-label hor-form">Category</label>
 		<div class="col-sm-10">
-		  <input type="category" name="product_category" class="form-control" id="inputprice" placeholder="Category">
+		  <input type="category" name="book_category" class="form-control" id="inputprice" placeholder="Category">
 		</div>
 	  </div>
-      <div class="form-group">
-		<label class="col-sm-2 control-label hor-form">Book Description</label>
+	  <div class="form-group">
+		<label class="col-sm-2 control-label hor-form">sub-category</label>
 		<div class="col-sm-10">
-		  <input type="text" name="product_description" class="form-control" id="inputdescription" placeholder="Book Dispriction">
+		  <input type="category" name="book_sub-category" class="form-control" id="inputprice" placeholder="Sub-category">
 		</div>
 	  </div>
       <div class="form-group">
@@ -67,16 +63,43 @@
 		</div>
 	  </div>
 	  <div class="form-group">
+		<label class="col-sm-2 control-label hor-form">Language</label>
+		<div class="col-sm-10">
+		  <input type="category" name="book_language" class="form-control" id="inputprice" placeholder="Language">
+		</div>
+	  </div>
+	  <div class="form-group">
+		<label class="col-sm-2 control-label hor-form">Available-Copies</label>
+		<div class="col-sm-10">
+		  <input type="category" name="book_available-copies" class="form-control" id="inputprice" placeholder="Available-Copies">
+		</div>
+	  </div>
+	  {% comment %} <div class="form-group">
 		<label class="col-sm-2 control-label hor-form">Book image</label>
 		<div class="col-sm-10">
 		  <input type="file" name="image" class="form-control" id="inputprice" placeholder="Book image">
 		</div>
-	  </div>
-	  
+	  </div> {% endcomment %}
+
       <button type="submit" class="btn btn-primary">Add Book</button>
 	  {{msg}}
 	</form>
-										
+
+    <hr>
+
+    <h3>Bulk Upload Books via Excel</h3>
+    <form action="{% url 'add product' %}" enctype="multipart/form-data" method="post" class="form-horizontal">
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="col-sm-2 control-label hor-form">Upload Excel File</label>
+            <div class="col-sm-10">
+                <input type="file" name="excel_file" class="form-control" accept=".xlsx,.xls" required>
+            </div>
+        </div>
+        <button type="submit" name="upload_excel" class="btn btn-primary">Upload</button>
+        {{ excel_msg }}
+    </form>
+		
 											
 													
 <!-- script-for sticky-nav -->
@@ -108,14 +131,6 @@
 							<ul id="menu" >
 								<li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-tachometer"></i> <span>Dashboard</span><div class="clearfix"></div></a></li>
 								
-	
-								 
-								 <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span> Category </span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
-									<ul id="menu-academico-sub" >
-									<li id="menu-academico-avaliacoes" ><a href="{% url 'add category' %}">Add Category</a></li>
-									 <li id="menu-academico-avaliacoes" ><a href="{% url 'view category' %}">View Category</a></li>
-								   </ul>
-								 </li>
 								 <li id="menu-academico" ><a href="#"><i class="fa fa-navicon" aria-hidden="true"></i><span> Book </span> <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
 									<ul id="menu-academico-sub" >
 									<li id="menu-academico-avaliacoes" ><a href="{% url 'add product' %}">Add Book</a></li>
@@ -130,7 +145,18 @@
 					<li><a href="{% url 'suggested book' %}"><i class="fa fa-eye"></i> <span>Suggested book</span>
 							<div class="clearfix"></div>
 						</a></li>
-					</li>
+					<li><a href="{% url 'write_blog' %}"><i class="fa fa-eye"></i> <span>Write Blog</span>
+							<div class="clearfix"></div>
+						</a></li>
+					<li><a href="{% url 'event' %}"><i class="fa fa-eye"></i> <span>Event</span>
+							<div class="clearfix"></div>
+						</a></li>
+					<li><a href="{% url 'donated' %}"><i class="fa fa-gift"></i> <span>Donated Books</span>
+							<div class="clearfix"></div>
+						</a></li>
+					<li><a href="{% url 'feedback' %}"><i class="fa fa-gift"></i> <span>Feedback</span>
+							<div class="clearfix"></div>
+						</a></li>
 					<li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> <span>Logout</span>
 							<div class="clearfix"></div>
 						</a></li>

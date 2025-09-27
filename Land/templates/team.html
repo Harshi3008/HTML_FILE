@@ -1,0 +1,217 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Team - Literary Land</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"/>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+              
+    <style> 
+        header {
+            background-color: #553810ff;
+            padding: 5px 0;
+            max-width: 100%;
+            max-height: 75px;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+ 
+        .navbar-nav .nav-link {
+            color: white;
+            margin-right: 15px;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffc107;
+        }
+        .owl-carousel .item {
+            padding: 15px;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .bg {
+            background-color: #553810ff;
+        }
+    </style>
+  </head>
+<body>
+    <!-- Navbar -->
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <ul class="navbar-nav"> 
+              <a class="nav-link" href="{% url 'index' %}">Home</a>
+              <a class="nav-link" href="{% url 'about' %}">About</a>
+              <a class="nav-link" href="{% url 'book' %}">Books</a>
+              <a class="nav-link" href="{% url 'events' %}">Event</a>
+              <a class="nav-link" href="{% url 'blog_list' %}">Blog</a>
+              <a class="nav-link" href="{% url 'team' %}">Team</a>
+        </ul>
+        <ul class="navbar-nav ms-auto">        
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+            <a class="nav-link" href="{% url 'membership' %}">Signup</a>
+            <a class="nav-link" href="{% url 'donation' %}">Donation</a>
+            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Team -->
+    <div class="container mt-5">
+        <h3 class="text-center">Team of Literary Land</h3>
+        <div class="owl-carousel owl-theme mt-3">
+            <div class="card"> 
+              <div class="card-body text-center">
+                <img src="{% static 'images/T01.jpg' %}" class="img-fluid" alt="Javitri Sahu"><br>
+               <h5> Javitri Sahu</h5> <br>Chairman, BHAI JI FOUNDATION
+              </div>
+            </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/HH.jpg' %}" class="img-fluid" alt="Harshita Verma"><br>
+               <h5> Harshita Verma </h5> <br>Trustee, Technical head
+            </div>
+            </div>
+              
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/GS.jpg' %}" class="img-fluid" alt="Dr. Gauri Sahu"><br>
+               <h5> Dr. Gauri Sahu</h5> <br>MD, KPMC
+            </div>
+            </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/KK.jpg' %}" class="img-fluid" alt="Krishna Kant Verma"><br>
+               <h5> Krishna Kant Verma </h5> <br>Writer
+            </div>
+            </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/AS.jpg' %}" class="img-fluid" alt="Karna Bhaiji"><br>
+               <h5> Karna Bhaiji </h5> <br>Reiki Grand Master
+            </div>
+            </div>
+          <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/BM.jpg' %}" class="img-fluid" alt="Braj mohan patel"><br>
+               <h5>Braj Patel </h5> <br>Technical advisor
+
+              </div>
+            </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/SR.jpg' %}" class="img-fluid" alt="Shailraj"><br>
+               <h5> Shailraj </h5> <br> Event head
+              </div>
+            </div>
+            
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/TU.jpg' %}" class="img-fluid" alt="Tauseef Alam"><br>
+               <h5> Tauseef Alam </h5> <br> Community head
+              </div>
+            </div>
+            
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/BHABHI.jpg' %}" class="img-fluid" alt="Anjana Verma"><br>
+               <h5> Anjana Verma </h5> <br>Volunteering Coordinator
+              </div>
+            </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/GSS.jpg' %}" class="img-fluid" alt="Jigisha srivastava"><br>
+               <h5> Jigisha srivastava </h5> <br>Scientist ISRO
+              </div>
+              </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/AV.jpg' %}" class="img-fluid" alt="Prof. Ashwin Kumar Kushwaha"><br>
+               <h5> Prof. Ashwin Kumar Kushwaha </h5> <br>Assi. Professor, Department of Library and Information Science
+              </div>
+            </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/MG.jpg' %}" class="img-fluid" alt="Dr Govind Maurya"><br>
+               <h5> Dr Govind Maurya  </h5> <br>Project Research Scientist, IIT Bombay
+              </div>
+            </div>
+            <div class="card"><div class="card-body text-center">
+                <img src="{% static 'images/RK.jpg' %}" class="img-fluid" alt="Krishna Rajora"><br>
+               <h5> Krishna Rajora </h5> <br>Library Assistant, Sahitya Akademi
+              </div>
+            </div>
+
+        </div>
+    </div>
+
+<!-- Footer -->
+    <footer class="bg text-white mt-5 pt-5 pb-3">
+        <div class="container">
+            <div class="row">
+                <!-- Contact Info -->
+                <div class="col-md-4 mb-4">
+                    <h4>Contact Info</h4>
+                    <p><strong>Address:</strong> L.I.G.67 Maharshi Dayanand Vihar, Phase 1 Kalyanpur, Kanpur, India</p>
+                    <p><strong>Mobile Number:</strong> +91 - 9621109538</p>
+                    <p><strong>Phone Number:</strong> +91 - 9580862771</p>
+                    <p><strong>Email ID:</strong> literaryland.bft@gmail.com</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-md-4 mb-4">
+                    <h4>Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'membership' %}" class="text-white text-decoration-none">Membership</a></li>
+                        <li><a href="{% url 'donation' %}" class="text-white text-decoration-none">Donations</a></li>
+                        <li><a href="{% url 'contact' %}" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Media -->
+                <div class="col-md-4 mb-4">
+                    <h4>Follow Us</h4>
+                    <a href="https://www.facebook.com/share/1B8gzCaQYS/?mibextid=wwXIfr" class="text-white me-3"><i class="fa fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/literary__land?igsh=YzljYTk1ODg3Zg==" class="text-white me-3"><i class="fa fa-instagram"></i></a>
+                    <a href="https://youtube.com/@literaryland_bft?feature=shared" class="text-white me-3"><i class="fa fa-youtube"></i></a>
+                </div>
+            </div>
+            <hr class="border-light">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 Literary Land. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FontAwesome for social icons -->
+    <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

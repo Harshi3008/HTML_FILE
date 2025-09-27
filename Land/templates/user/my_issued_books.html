@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Issued Books</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2>My Issued Books</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Book</th>
+        <th>Issue Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for issued in issued_books %}
+      <tr>
+        <td>{{ issued.book.title }}</td>
+        <td>{{ issued.issue_date }}</td>
+        <td>{{ issued.return_date }}</td>
+        <td>
+          {% if issued.is_returned %}
+            ✅ Returned
+          {% else %}
+            📚 Issued
+          {% endif %}
+        </td>
+        <td>
+          {% if not issued.is_returned %}
+            {% with days_since=(today|date:"U"|add:"-0"|divisibleby:86400) %}
+              {% comment %} we’ll calculate in view instead {% endcomment %}
+            {% endwith %}
+
+            <!-- Reissue allowed only between 5th and 14th day -->
+            {% if issued.can_reissue %}
+              <form method="post" action="{% url 'reissue_book' issued.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning btn-sm">Reissue</button>
+              </form>
+            {% else %}
+              <button class="btn btn-secondary btn-sm" disabled>Reissue Not Available</button>
+            {% endif %}
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">No books issued yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
