@@ -24,30 +24,33 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 
 
-# Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-fb!geo==2ggg9ewvjsj0eo#(!3vjexf#@zil@lmg0g9*4c0z69'
 
-# Razorpay credentials
-RAZORPAY_KEY_ID = "your_key_id"
-RAZORPAY_KEY_SECRET = "your_key_secret"
+# Security settings for development
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_HSTS_SECONDS = 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
 
+# Disable HTTPS/SSL in development
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_HSTS_SECONDS = 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# Allow all hosts in development
+ALLOWED_HOSTS = ['*']
+
+# Development settings
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Land',
